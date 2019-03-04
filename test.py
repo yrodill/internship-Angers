@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from cdt.independence.stats.all_types import AdjMI
 from networkx import Graph,draw,shell_layout
 
-data = pd.read_csv('../../CausalGen/Syntren/data/results/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_maxExpr1_dataset.txt', sep="\t",engine="python",index_col=0)
+data = pd.read_csv('~/CausalGen/Syntren/data/results/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_maxExpr1_dataset.txt', sep="\t",engine="python",index_col=0)
 
 data = data.T
 
