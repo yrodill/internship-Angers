@@ -9,3 +9,6 @@
 - Day 2 :
   - Started test of the GENIE3 package (https://bioconductor.org/packages/release/bioc/html/GENIE3.html)
   - test_GENIE3.py and test_GENIE3.R
+
+- Day 3 :
+  - To do : Adjacency Matrix extracted from "nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_network.sif" file. (parsing + comparison with weightMat given by GENIE3) and use scikit-learn to make the precision and recall test (np.ravel(weightMat) => conversion into n² vector size)
