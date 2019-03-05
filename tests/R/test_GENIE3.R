@@ -8,14 +8,15 @@ data <- as.matrix(data,dimnames = row.names(data))
 
 regulators <- c()
 
+#Finding regulators from the result file obtained with the Syntren generator
 data_regulators <- read.table(file="~/CausalGen/Syntren/data/results/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_external.txt",sep = "\t",header = TRUE)
 for(reg in data_regulators[,1])
   regulators <- c(regulators,reg)
 
 set.seed(123) # For reproducibility of results
-weightMat <- GENIE3(data,regulators = regulators,nTrees = 50,K=7,treeMethod="ET")
+weightMat <- GENIE3(data,regulators = regulators,nTrees = 50,K="all")
 
-linkList <- getLinkList(weightMat)
+linkList <- getLinkList(weightMat, threshold=0.5)
 #View(linkList)
 
 write.table(linkList, file="~/internship-Angers/tests/results/linkList.txt", row.names=FALSE, col.names=TRUE,sep="\t")
