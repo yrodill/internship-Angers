@@ -6,6 +6,14 @@ from sklearn.metrics import precision_recall_curve
 import matplotlib.pyplot as plt
 from sklearn.utils.fixes import signature
 
+"""ATTENTION /!/
+Parameters used for the test when generating the Syntren generator (must be the same ohterwise the program won't work) :
+    Nr experiments : 500
+    Nr Nodes : 20
+    Nr background nodes : 0
+    All others : default
+"""
+
 def CSVtoVector(path):
     """Returns the genes list given by the weighted matrix obtained with GENIE3 and the weighted predictions made on the data
         Args:
@@ -89,7 +97,7 @@ def getAdjacencyMatrix(pathToKnownResults,pathToExperimentalResults,genesNames):
 os.system("Rscript R/test_GENIE3.R")
 
 genes,weightedPrediction = CSVtoVector("results/weightMat.csv")
-adjMat = getAdjacencyMatrix("/home/bothorel/CausalGen/Syntren/data/results/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_network.sif","results/linkList.txt",genes)
+adjMat = getAdjacencyMatrix("/home/bothorel/CausalGen/Syntren/data/results/nn20_nbgr0_hop0.1_bionoise0.3_expnoise0.1_corrnoise0.1_neighAdd_network.sif","results/linkList.txt",genes)
 
 average_precision = average_precision_score(adjMat,weightedPrediction)
 
