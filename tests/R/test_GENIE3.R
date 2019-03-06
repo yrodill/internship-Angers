@@ -3,13 +3,13 @@
 library(GENIE3)
 #browseVignettes("GENIE3")
 
-data <- read.table(file = "~/CausalGen/Syntren/data/results/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_maxExpr1_dataset.txt",sep = "\t",header = TRUE , row.names = 1)
+data <- read.table(file = "~/internship-Angers/tests/Syntren/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_maxExpr1_dataset.txt",sep = "\t",header = TRUE , row.names = 1)
 data <- as.matrix(data,dimnames = row.names(data))
 
 regulators <- c()
 
 #Finding regulators from the result file obtained with the Syntren generator
-data_regulators <- read.table(file="~/CausalGen/Syntren/data/results/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_external.txt",sep = "\t",header = TRUE)
+data_regulators <- read.table(file="~/internship-Angers/tests/Syntren/nn100_nbgr100_hop0.3_bionoise0.1_expnoise0.1_corrnoise0.1_neighAdd_external.txt",sep = "\t",header = TRUE)
 for(reg in data_regulators[,1])
   regulators <- c(regulators,reg)
 
