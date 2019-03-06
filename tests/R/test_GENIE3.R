@@ -14,7 +14,7 @@ for(reg in data_regulators[,1])
   regulators <- c(regulators,reg)
 
 set.seed(123) # For reproducibility of results
-weightMat <- GENIE3(data,nTrees = 1000)
+weightMat <- GENIE3(data,nTrees = 100)
 
 linkList <- getLinkList(weightMat)
 #View(linkList)
