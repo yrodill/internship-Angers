@@ -14,9 +14,9 @@ for(reg in data_regulators[,1])
   regulators <- c(regulators,reg)
 
 set.seed(123) # For reproducibility of results
-weightMat <- GENIE3(data,regulators = regulators,nTrees = 50,K="all")
+weightMat <- GENIE3(data,nTrees = 1000)
 
-linkList <- getLinkList(weightMat, threshold=0.5)
+linkList <- getLinkList(weightMat)
 #View(linkList)
-
+write.csv(weightMat, file="~/internship-Angers/tests/results/weightMat.csv")
 write.table(linkList, file="~/internship-Angers/tests/results/linkList.txt", row.names=FALSE, col.names=TRUE,sep="\t")
