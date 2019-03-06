@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sklearn.utils.fixes import signature
 
 """ATTENTION /!/
-Parameters used for the test when generating the Syntren generator (must be the same ohterwise the program won't work) :
+Parameters used for the test when generating with the Syntren generator (must be the same ohterwise the program won't work) :
     Nr experiments : 500
     Nr Nodes : 20
     Nr background nodes : 0
@@ -15,7 +15,7 @@ Parameters used for the test when generating the Syntren generator (must be the 
 """
 
 def CSVtoVector(path):
-    """Returns the genes list given by the weighted matrix obtained with GENIE3 and the weighted predictions made on the data
+    """Returns the genes list of the network and the array containing weighted predictions made on the data with GENIE3
         Args:
             path (txt FILE): file contained in the Syntren results repositery.
         Returns:
@@ -26,16 +26,16 @@ def CSVtoVector(path):
     with open(path) as f:
         lines=f.readlines()
 
-    ignoreLine1 = 0
+    ignoreLine1 = False
     tmp=[]
     genes=0
     for l in lines:
         weight=l.strip().split(',')
-        if(ignoreLine1>0):
+        if(ignoreLine1):
             tmp.append(weight[1:])
         else:
             genes=weight[1:]
-        ignoreLine1+=1
+            ignoreLine1=True
 
     weightedPrediction=[]
     for liste in tmp:
@@ -49,6 +49,7 @@ def CSVtoVector(path):
 
 def getAdjacencyMatrix(pathToKnownResults,pathToExperimentalResults,genesNames):
     """Compute the adjacency matrix by comparing each genes combinaisons with the results from the experimental and the known results.
+        In the acutal state, it only calculates the adjacency matrix for undirected combinations
         Args:
             pathToKnownResults (sif FILE): file contained in the Syntren results repositery containing all the known interaction from the network.
             pathToExperimentalResults (txt FILE): file written from the R script using GENIE3 linkList() function.
@@ -67,13 +68,14 @@ def getAdjacencyMatrix(pathToKnownResults,pathToExperimentalResults,genesNames):
     with open(pathToExperimentalResults) as f:
         lines=f.readlines()
 
-    ignoreLine1 = 0
+    ignoreLine1 = False
     expPos=[]
     for l in lines:
         genes=l.strip().replace('"',"").split("\t")
-        if(ignoreLine1>0):
+        if(ignoreLine1):
             expPos.append(genes[0]+" "+genes[1])
-        ignoreLine1+=1
+        else:
+            ignoreLine1=True
 
     adjMatrix = []
     for gene1 in genesNames:
