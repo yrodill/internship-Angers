@@ -19,3 +19,4 @@
 - Day 4 :
   - Meeting at 2:30pm
   - Try to implement GENIE3 test into the CDT
+  - Adding arguments, which are the parameters of the Syntren generator used by the user, to the test_GENIE3.py

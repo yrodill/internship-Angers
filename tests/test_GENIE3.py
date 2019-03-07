@@ -49,7 +49,7 @@ def CSVtoVector(path):
 
 
 def getAdjacencyMatrix(pathToKnownResults,pathToExperimentalResults,genesNames):
-    """Compute the adjacency matrix by comparing each genes combinaisons with the results from the experimental and the known results.
+    """Compute the adjacency matrix by comparing each genes combinations with the results from the experimental and the known results.
         In the acutal state, it only calculates the adjacency matrix for undirected combinations
         Args:
             pathToKnownResults (path to sif FILE): file contained in the Syntren results repositery containing all the known interaction from the network.
