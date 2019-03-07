@@ -18,5 +18,7 @@
   
 - Day 4 :
   - Meeting at 2:30pm
-  - Try to implement GENIE3 test into the CDT
+  - ~~Try to implement GENIE3 test into the CDT~~ -> later
+  - Reading : deeplearningbook.pdf
   - Adding arguments, which are the parameters of the Syntren generator used by the user, to the test_GENIE3.py
+  - New dataset given by the biologists : file CoRGI_data_Catma5_intensities.tar.gz
