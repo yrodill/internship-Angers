@@ -1,4 +1,6 @@
 import os
+import sys
+import argparse
 import csv
 import numpy as np
 from sklearn.metrics import average_precision_score
@@ -6,18 +8,17 @@ from sklearn.metrics import precision_recall_curve
 import matplotlib.pyplot as plt
 from sklearn.utils.fixes import signature
 
-"""ATTENTION /!/
-Parameters used for the test when generating with the Syntren generator (must be the same ohterwise the program won't work) :
-    Nr experiments : 500
-    Nr Nodes : 20
-    Nr background nodes : 0
-    All others : default
+"""
+Bothorel Benoît
+March 2019
+Launch the script with :
+python test_GENIE3.py -nn [int] -nbrg [int] -hop [float] -bionoise [float] -expnoise [float] -corrnoise [float]        
 """
 
 def CSVtoVector(path):
     """Returns the genes list of the network and the array containing weighted predictions made on the data with GENIE3
         Args:
-            path (txt FILE): file contained in the Syntren results repositery.
+            path (path to csv FILE): expression data file contained in the Syntren repositery.
         Returns:
             list : genes list
             list : weighted predictions flattened
@@ -51,8 +52,8 @@ def getAdjacencyMatrix(pathToKnownResults,pathToExperimentalResults,genesNames):
     """Compute the adjacency matrix by comparing each genes combinaisons with the results from the experimental and the known results.
         In the acutal state, it only calculates the adjacency matrix for undirected combinations
         Args:
-            pathToKnownResults (sif FILE): file contained in the Syntren results repositery containing all the known interaction from the network.
-            pathToExperimentalResults (txt FILE): file written from the R script using GENIE3 linkList() function.
+            pathToKnownResults (path to sif FILE): file contained in the Syntren results repositery containing all the known interaction from the network.
+            pathToExperimentalResults (path to txt FILE): file written from the R script using GENIE3 linkList() function.
             genesNames (list): list of the genes from the weighted matrix obtained from GENIE3.
         Returns:
             list: adjacency matrix flattened
@@ -95,28 +96,41 @@ def getAdjacencyMatrix(pathToKnownResults,pathToExperimentalResults,genesNames):
 
 
 ###MAIN###
-#RUN the R script on the data obtained from Syntren
-os.system("Rscript R/test_GENIE3.R")
+if __name__=="__main__":
+    parser=argparse.ArgumentParser()
+    parser.add_argument('-nn',help="Number of nodes used in the network [int] : default 100")
+    parser.add_argument('-nbgr',help="Number of background nodes [int] : default 100")
+    parser.add_argument('-hop',help="Probability for complex 2-regulator interactions [0..1] : default 0.3")
+    parser.add_argument('-bionoise',help="Biological noise [0..1] : default 0.1")
+    parser.add_argument('-expnoise',help="Experimental noise [0..1] : default 0.1")
+    parser.add_argument('-corrnoise',help="Noise on correlated inputs [0..1] : default 0.1")
+    args=parser.parse_args()
 
-genes,weightedPrediction = CSVtoVector("results/weightMat.csv")
-adjMat = getAdjacencyMatrix("/home/bothorel/CausalGen/Syntren/data/results/nn20_nbgr0_hop0.1_bionoise0.3_expnoise0.1_corrnoise0.1_neighAdd_network.sif","results/linkList.txt",genes)
+    if len(sys.argv)<6:
+        print ("Wrong input args.\nUsage : -nn [int] -nbrg [int] -hop [float] -bionoise [float] -expnoise [float] -corrnoise [float]")               
+    else:
+        #RUN the R script on the data obtained from Syntren
+        os.system("Rscript R/test_GENIE3.R")
 
-average_precision = average_precision_score(adjMat,weightedPrediction)
+        genes,weightedPrediction = CSVtoVector("results/weightMat.csv")
+        adjMat = getAdjacencyMatrix("/home/bothorel/CausalGen/Syntren/data/results/nn{}_nbgr{}_hop{}_bionoise{}_expnoise{}_corrnoise{}_neighAdd_network.sif".format(str(args.nn),str(args.nbgr),str(args.hop),str(args.bionoise),str(args.expnoise),str(args.corrnoise)),"results/linkList.txt",genes)
 
-precision, recall, _ = precision_recall_curve(adjMat, weightedPrediction)
+        average_precision = average_precision_score(adjMat,weightedPrediction)
 
-# In matplotlib < 1.5, plt.fill_between does not have a 'step' argument
-step_kwargs = ({'step': 'post'}
-               if 'step' in signature(plt.fill_between).parameters
-               else {})
-plt.step(recall, precision, color='b', alpha=0.2,
-         where='post')
-plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
+        precision, recall, _ = precision_recall_curve(adjMat, weightedPrediction)
 
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.ylim([0.0, 1.05])
-plt.xlim([0.0, 1.0])
-plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(
-          average_precision))
-plt.show()
+        # In matplotlib < 1.5, plt.fill_between does not have a 'step' argument
+        step_kwargs = ({'step': 'post'}
+                    if 'step' in signature(plt.fill_between).parameters
+                    else {})
+        plt.step(recall, precision, color='b', alpha=0.2,
+                where='post')
+        plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
+
+        plt.xlabel('Recall')
+        plt.ylabel('Precision')
+        plt.ylim([0.0, 1.05])
+        plt.xlim([0.0, 1.0])
+        plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(
+                average_precision))
+        plt.show()
