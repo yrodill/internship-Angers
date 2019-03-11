@@ -17,7 +17,7 @@
   - KCI-test (independance test)
   
 - **Day 4** :
-  - Meeting at 2:30pm
+  - Meeting at 2:00pm
   - ~~Try to implement GENIE3 test into the CDT~~ -> later
   - Reading : deeplearningbook.pdf (keep reading at page 90)
   - Adding arguments, which are the parameters of the Syntren generator used by the user, to the test_GENIE3.py
@@ -25,6 +25,10 @@
   
 - **Day 5** :
   - Keep reading the deeplearningbook.pdf
-  - Test Syntren data on SAM (helped by O.Goudet)
-  - Try to implement GENIE3 in the CDT => day 4 renewal
+  - ~~Test Syntren data on SAM (helped by O.Goudet)~~
+  - ~~Try to implement GENIE3 in the CDT => day 4 renewal~~
   - Think about the data (i.e what we could use from the json metadata file)
+
+- **Day 6** :
+  - Still reading the deeplearningbook.pdf !
+  - Still trying to make the toolbox work on the computer ; stupid R dependencies!
