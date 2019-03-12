@@ -24,9 +24,11 @@
 library(GENIE3)
 
 dataset <- read.csv(file='{FOLDER}{FILE}', sep=",");
+dataset <- t(dataset)
+dataset <- as.matrix(dataset)
 
 weightMat <- GENIE3(dataset, regulators = {REGULATORS}, nCores = {NJOBS}, verbose = {VERBOSE},
               targets = {TARGETS}, treeMethod = '{TREEMETHOD}', K = '{K}',
               nTrees = {NTREES})
 
-write.csv(weightMat, file = '{FOLDER}{OUTPUT}')
+write.csv(weightMat, file = '{FOLDER}{OUTPUT}',row.names=FALSE)

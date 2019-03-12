@@ -89,7 +89,7 @@ class GENIE3(GraphModel):
     """
 
     def __init__(self,regulators='NULL',targets='NULL', treeMethod='RF', K='sqrt', nTrees=1000,
-                 nb_jobs=None, verbose=None):
+                 nb_jobs=None, verbose=False):
         """Init the model and its available arguments."""
         if not RPackages.GENIE3:
             raise ImportError("R Package GENIE3 is not available.")
@@ -153,8 +153,6 @@ class GENIE3(GraphModel):
         self.arguments['{FOLDER}'] = '/tmp/cdt_GENIE3' + id + '/'
 
         def retrieve_result():
-            print (self.arguments)
-            input('PAUSE')
             return read_csv('/tmp/cdt_GENIE3' + id + '/result.csv', delimiter=',').values
 
         try:
