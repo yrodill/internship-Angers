@@ -40,3 +40,9 @@
   - Reading : https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0012776&type=printable
   - To be implemented : find_MCE.py ; find the matrice of co-expression using biological data.
   - Thought : using CATdb to validate the results ?
+
+- **Day 8** :
+  - Tested GENIE3 : problem with the AUPR result (too low ?)
+  - Checked the matrice adjacency between the 2 methods (86.25% of identity)
+  - Maybe it's related to the data and not the algortihms.
+  - Meeting skype with Thomas Duge de Bernonville de l'Université de Tours (about the paper "Ranking genome-wide correlation measurements improves microarray and RN-seq based global and targeted co-expression networks")
