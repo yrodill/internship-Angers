@@ -44,5 +44,11 @@
 - **Day 8** :
   - Tested GENIE3 : problem with the AUPR result (too low ?)
   - Checked the matrice adjacency between the 2 methods (86.25% of identity)
-  - Maybe it's related to the data and not the algortihms.
-  - Meeting skype with Thomas Duge de Bernonville de l'Université de Tours (about the paper "Ranking genome-wide correlation measurements improves microarray and RN-seq based global and targeted co-expression networks")
+  - Maybe it's related to the data and not the algorithms.
+  - Meeting skype with Thomas Dugé de Bernonville de l'Université de Tours (about the paper "Ranking genome-wide correlation measurements improves microarray and RN-seq based global and targeted co-expression networks")
+
+- **Day 9** :
+  - Repaired GENIE3, GENIE3 was sorting the genes by name (the modification is in the R script, reading the gene's order from file then comparing both file and genie3 output and reordering columns/rows according to the file)
+  - Tested GENIE3 on 20/100 datasets : On 20 => AUPR 0.15 to 0.32. On 100 => AUPR 
+  - Meeting => EGAD/H2O R packages - scripts will be sent soon / they used GO terms to build ref networks and compared their results with those networks.
+  - /!\ The arguments of GENIE3 might not work properly. To check !
