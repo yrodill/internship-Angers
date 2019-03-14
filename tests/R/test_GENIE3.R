@@ -3,8 +3,29 @@
 library(GENIE3)
 #browseVignettes("GENIE3")
 
-data <- read.table(file = "../Syntren/syntrenHop1_20_0_data.csv",sep = ",",header=TRUE,index=FALSE)
+data <- read.table(file = "~/internship-Angers/tests/benchmark/genie3_syntren/syntrenHop2_20_0_data.csv",sep = ",",header=TRUE)
 data <- as.matrix(data,dimnames = row.names(data))
+data <- t(data)
+
+rowOrder <- row.names(data)
+matriceOrder <- sort(rowOrder)
+View(rowOrder)
+
+newOrder <- c()
+
+for(x in rowOrder){
+  index=1
+  for(y in matriceOrder){
+    if(x==y){
+      newOrder <- c(newOrder,index)
+    }
+    index<-index+1
+  }
+}
+
+#View(newOrder)
+print(newOrder)
+  
 
 regulators <- c()
 
@@ -15,6 +36,8 @@ for(reg in data_regulators[,1])
 
 set.seed(123) # For reproducibility of results
 weightMat <- GENIE3(data,nTrees = 1000)
+
+weightMat <- weightMat[newOrder,newOrder]
 
 linkList <- getLinkList(weightMat)
 #View(linkList)

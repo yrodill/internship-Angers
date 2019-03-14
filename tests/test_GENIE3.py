@@ -94,6 +94,35 @@ def getAdjacencyMatrix(pathToKnownResults,pathToExperimentalResults,genesNames):
 
     return adjMatrix
 
+def adjMatrixFromKnown(pathToKnownResults,genesNames):
+    print(genesNames)
+    dic={}
+    for i,gene in enumerate(genesNames):
+        dic[gene.replace('"',"")] = i
+
+
+    with open(pathToKnownResults) as knownInteractions:
+        lines=knownInteractions.readlines()
+    
+    matrix=[]
+    for i in range(len(genesNames)):
+        matrix.append([])
+        for j in range(len(genesNames)):
+            matrix[i].append(0)
+
+    for l in lines:
+        word=l.strip().split()
+        i=dic[word[0]]
+        j=dic[word[2]]
+        matrix[i][j]=1
+    print ("TARGET",matrix)
+
+    res = []
+    for i in matrix:
+        for j in i:
+            res.append(j)
+    return res
+
 
 ###MAIN###
 if __name__=="__main__":
@@ -113,12 +142,18 @@ if __name__=="__main__":
         #os.system("Rscript R/test_GENIE3.R")
 
     genes,weightedPrediction = CSVtoVector("results/weightMat.csv")
+    print("prediction")
+    print(weightedPrediction)
     #adjMat = getAdjacencyMatrix("/home/bothorel/CausalGen/Syntren/data/results/nn{}_nbgr{}_hop{}_bionoise{}_expnoise{}_corrnoise{}_neighAdd_network.sif".format(str(args.nn),str(args.nbgr),str(args.hop),str(args.bionoise),str(args.expnoise),str(args.corrnoise)),"results/linkList.txt",genes)
-    adjMat = getAdjacencyMatrix("Syntren/nn20_nbgr0_hop0.1_bionoise0.3_expnoise0.1_corrnoise0.1_neighAdd_network.sif","results/linkList.txt",genes)
-    print(adjMat)
+    #adjMat = getAdjacencyMatrix("Syntren/nn20_nbgr0_hop0.1_bionoise0.3_expnoise0.1_corrnoise0.1_neighAdd_network.sif","results/linkList.txt",genes)
+    #print(adjMat)
+    adjMat = adjMatrixFromKnown("Syntren/nn20_nbgr0_hop0.1_bionoise0.3_expnoise0.1_corrnoise0.1_neighAdd_network.sif",genes)
     average_precision = average_precision_score(adjMat,weightedPrediction)
 
     precision, recall, _ = precision_recall_curve(adjMat, weightedPrediction)
+
+    print("Precision : {} \n Recall : {}".format(precision,recall))
+    print("Average precision : {0:0.2f}".format(average_precision))
 
     # In matplotlib < 1.5, plt.fill_between does not have a 'step' argument
     step_kwargs = ({'step': 'post'}
@@ -134,3 +169,4 @@ if __name__=="__main__":
     plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(
             average_precision))
     plt.show()
+

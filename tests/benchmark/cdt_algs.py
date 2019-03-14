@@ -8,7 +8,9 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 from cdt.utils.metrics import SHD
-from sklearn.metrics import average_precision_score
+from sklearn.metrics import average_precision_score,precision_recall_curve
+from sklearn.utils.fixes import signature
+import matplotlib.pyplot as plt
 from sklearn.utils import resample
 from copy import deepcopy
 from cdt.causality import graph
@@ -19,7 +21,7 @@ parser.add_argument('folder', metavar='f', type=str, help='data folder')
 parser.add_argument('alg', metavar='a', type=str,
                     help="name of the algorithm to use", default=-1)
 parser.add_argument('--nruns', metavar='j', type=int,
-                    help="num of runs", default=6)
+                    help="num of runs", default=1)
 parser.add_argument('--njobs', metavar='j', type=int,
                     help="num of jobs", default=6)
 parser.add_argument('--tsv', help="TSV file", action='store_true')
@@ -46,6 +48,7 @@ pbar = tqdm(total=nfiles * args.nruns)
 
 def score_function(prediction, target):
     prediction = np.nan_to_num(prediction)
+    print("PREDICTION :",prediction)
     preds = []
     for threshold in np.arange(.1,1,.1):
         mat = deepcopy(prediction)
@@ -54,7 +57,8 @@ def score_function(prediction, target):
         preds.append(mat)
     return (average_precision_score(target.ravel(), prediction.ravel()),
             [SHD(m, target) for m in preds],
-            [nx.is_directed_acyclic_graph(nx.DiGraph(m)) for m in preds])
+            [nx.is_directed_acyclic_graph(nx.DiGraph(m)) for m in preds],
+            target.ravel(),prediction.ravel())
 
 
 def run_alg(model_c, data, **params):
@@ -119,21 +123,32 @@ for _file in glob.glob(args.folder + "/*data*"):
             if len(row) < 3 or int(row[2]):
                 target[lstcols.index(row[0]), lstcols.index(row[1])] = 1
 
+        
+    
     preds = bootstrap_alg(model[args.alg], params[args.alg], data, n=args.nruns)
-    print(preds)
     
     avg_pred = sum([np.array(nx.adjacency_matrix(i, nodelist=list(data.columns)).todense()) 
                     for i in preds])/args.nruns
 
-    print("avg_pred")
-    print(avg_pred)
 
-    print("target")
-    print(target.ravel())
-    aupr, shd, dag = score_function(avg_pred, target)
+    aupr, shd, dag, tgt, rec= score_function(avg_pred, target)
 
-    print("aupr")
-    print(aupr)
+    precision, recall, _ = precision_recall_curve(tgt, rec)
+
+    # In matplotlib < 1.5, plt.fill_between does not have a 'step' argument
+    step_kwargs = ({'step': 'post'}
+                if 'step' in signature(plt.fill_between).parameters
+                else {})
+    plt.step(recall, precision, color='b', alpha=0.2,
+            where='post')
+    plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.ylim([0.0, 1.05])
+    plt.xlim([0.0, 1.0])
+    plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(
+            aupr))
+    plt.show()
 
     config_dict = dict({"File": _file.split("/")[-1],
                                  "Model": args.alg,
