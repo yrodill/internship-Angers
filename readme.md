@@ -52,3 +52,8 @@
   - Tested GENIE3 on 20/100 datasets : On 20 => AUPR 0.15 to 0.32. On 100 => AUPR 
   - Meeting => EGAD/H2O R packages - scripts will be sent soon / they used GO terms to build ref networks and compared their results with those networks.
   - /!\ The arguments of GENIE3 might not work properly. To check !
+
+- **Day 10** :
+  - Started a R script to filter the data from the biologist (removing lines with missing data) can be all lines or lines with more then 10% missing data
+  - Testing GENIE3 on the data (might be too long)
+  - Packages used by Thomas Dugé => corpcor / Parmigene knni.all

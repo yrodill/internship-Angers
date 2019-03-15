@@ -48,7 +48,6 @@ pbar = tqdm(total=nfiles * args.nruns)
 
 def score_function(prediction, target):
     prediction = np.nan_to_num(prediction)
-    print("PREDICTION :",prediction)
     preds = []
     for threshold in np.arange(.1,1,.1):
         mat = deepcopy(prediction)
