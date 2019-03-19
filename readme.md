@@ -64,4 +64,4 @@
   - Launched test of GENIE3 with relatively "low" parameters (K=5,nTrees=10) ~2h20 (run over 18 424 genes & 1042 exp)
   - Relaunch SAM on the 5 datasets from DREAM4 => results tomorrow
   - Reading : https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/#b19-bbi-10-2016-237 , https://ac.els-cdn.com/S1476927104001082/1-s2.0-S1476927104001082-main.pdf?_tid=3774c203-5cca-46dd-93d0-23153fcf1ac6&acdnat=1552917008_260409a181b0c2af90185c5fd11e871c
-  - From scikitlearn watch DBSCAN. (clustering method)
+  - ~~From scikitlearn watch DBSCAN. (clustering method)~~ => using distance matrix; cannot be used with our co-expression matrix
