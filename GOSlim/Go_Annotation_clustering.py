@@ -4,6 +4,13 @@ from copy import deepcopy
 Benoît BOTHOREL
 GO annotation genes clustering
 19/03/2019
+
+Ref::
+Liesecke, Franziska, et al. 
+"Ranking genome-wide correlation measurements improves microarray and
+ RNA-seq based global and targeted co-expression networks."
+ Sci. Rep., vol. 8, no. 1, 18 July 2018, p. 10885, 
+ doi:10.1038/s41598-018-29077-3.
 """
 
 dic={}
@@ -33,9 +40,9 @@ for clust in clusters:
     
     clusts[clust]=genes
 
-print("Len clust raw: ",len(clusts))
 
-finalClust=[clusts[k] for k in clusts  if(len(clusts[k]) > 10 and len(clusts[k]) < 40) ]
+finalClust=[clusts[k] for k in clusts  if(len(clusts[k]) > 5 and len(clusts[k]) < 100) ]
 
 print (finalClust)
+print("Len clust raw: ",len(clusts))
 print("Len clust filtered : ",len(finalClust))

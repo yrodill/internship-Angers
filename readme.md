@@ -65,3 +65,10 @@
   - Relaunch SAM on the 5 datasets from DREAM4 => results tomorrow
   - Reading : https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/#b19-bbi-10-2016-237 , https://ac.els-cdn.com/S1476927104001082/1-s2.0-S1476927104001082-main.pdf?_tid=3774c203-5cca-46dd-93d0-23153fcf1ac6&acdnat=1552917008_260409a181b0c2af90185c5fd11e871c
   - ~~From scikitlearn watch DBSCAN. (clustering method)~~ => using distance matrix; cannot be used with our co-expression matrix
+
+- **Day 12** :
+  - Clust didn't work on the biological data => why?
+  - GENIE3 made R crash when trying to compute the getListLink() function on the biological data
+  - Python script to create clusters of genes from GOSlim Annotation of AT
+  - R package WGCNA (clustering method) => R script test_WGCNA to be continued
+  - https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/ , https://www.rdocumentation.org/packages/WGCNA/versions/1.66 , http://pklab.med.harvard.edu/scw2014/WGCNA.html
