@@ -6,7 +6,15 @@ prepare_dataset <- function(df){
   
   lineToDelete <- c()
   
-  
+  for(row in 1:nrow(df)){
+    for(col in 1:ncol(df)){
+      if(df[row,col]=="" || is.na(df[row,col])){
+        lineToDelete <- c(lineToDelete,row)
+        break
+      }
+    }
+  }
+  return (df[-lineToDelete,])
 }
 
 lineToDelete10 <- c()
@@ -48,21 +56,14 @@ write.table(removedNANorm,file="~/internship-Angers/catma5/filtered_catma5_IRefN
 write.table(removedNASample10,file="~/internship-Angers/catma5/filtered_10_catma5_ISampleNorm.txt",row.names=TRUE, col.names=FALSE,sep="\t")
 write.table(removedNANorm10,file="~/internship-Angers/catma5/filtered_10_catma5_IRefNorm.txt",row.names=TRUE, col.names=FALSE,sep="\t")
 
+gen3 <- prepare_dataset(gen3)
 
-for(row in 1:nrow(gen3)){
-  for(col in 1:ncol(gen3)){
-    if(gen3[row,col]=="" || is.na(gen3[row,col])){
-      lineToDelete <- c(lineToDelete,row)
-      break
-    }
-  }
-}
-
-gen3 <- gen3[-lineToDelete,]
-
+??GENIE3
 library("GENIE3")
 set.seed(123)
 wMat <- GENIE3(gen3,nTrees = 10 , K=5,nCores=1,verbose=TRUE)
+
+linkList <- getLinkList(wMat)
 
 removedNASample <- t(removedNASample)
 genesNames <- removedNASample[1,]
@@ -75,7 +76,7 @@ removedNASample <- apply(removedNASample,c(1,2),as.numeric)
 library("corpcor")
 
 
-pcr1 <- pcor.shrink(removedNASample,verbose=TRUE)
+pcr1 <- pcor.shrink(gen3,verbose=TRUE)
 
 write.table(pcr1,file="~/internship-Angers/catma5/pcr.txt",row.names=genesNames, col.names=genesNames,sep="\t")
 

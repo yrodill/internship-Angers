@@ -121,6 +121,21 @@ def adjMatrixFromKnown(pathToKnownResults,genesNames):
             res.append(j)
     return res
 
+def matrixFromCorpCor(corpcorfile):
+
+    matrix=[]
+    with open(corpcorfile) as f:
+        lines = f.readlines()
+
+    for l in lines:
+        word=l.strip().split()
+        matrix.append(word)
+    
+    res = []
+    for i in matrix:
+        for j in i:
+            res.append(float(j))
+    return res
 
 ###MAIN###
 if __name__=="__main__":
@@ -144,9 +159,12 @@ if __name__=="__main__":
     #adjMat = getAdjacencyMatrix("Syntren/nn20_nbgr0_hop0.1_bionoise0.3_expnoise0.1_corrnoise0.1_neighAdd_network.sif","results/linkList.txt",genes)
     #print(adjMat)
     adjMat = adjMatrixFromKnown("Syntren/nn20_nbgr0_hop0.1_bionoise0.3_expnoise0.1_corrnoise0.1_neighAdd_network.sif",genes)
-    average_precision = average_precision_score(adjMat,weightedPrediction)
+    CCmat = matrixFromCorpCor("results/pcr1.txt")
+    
 
-    precision, recall, _ = precision_recall_curve(adjMat, weightedPrediction)
+    average_precision = average_precision_score(adjMat,CCmat)
+
+    precision, recall, _ = precision_recall_curve(adjMat, CCmat)
 
 
     # In matplotlib < 1.5, plt.fill_between does not have a 'step' argument
