@@ -72,3 +72,4 @@
   - Python script to create clusters of genes from GOSlim Annotation of AT
   - R package WGCNA (clustering method) => R script test_WGCNA to be continued
   - https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/ , https://www.rdocumentation.org/packages/WGCNA/versions/1.66 , http://pklab.med.harvard.edu/scw2014/WGCNA.html
+  - Connection to cluster of calc presented by O.Goudet !
