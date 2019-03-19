@@ -49,11 +49,19 @@
 
 - **Day 9** :
   - Repaired GENIE3, GENIE3 was sorting the genes by name (the modification is in the R script, reading the gene's order from file then comparing both file and genie3 output and reordering columns/rows according to the file)
-  - Tested GENIE3 on 20/100 datasets : On 20 => AUPR 0.15 to 0.32. On 100 => AUPR 
+  - Tested GENIE3 on 20/100 datasets : On 20 => AUPR 0.15 to 0.32. On 100 => AUPR ~0.12
   - Meeting => EGAD/H2O R packages - scripts will be sent soon / they used GO terms to build ref networks and compared their results with those networks.
   - /!\ The arguments of GENIE3 might not work properly. To check !
 
 - **Day 10** :
-  - Started a R script to filter the data from the biologist (removing lines with missing data) can be all lines or lines with more then 10% missing data
+  - Started a R script to filter the data from the biologists (removing lines with missing data) can be all lines or lines with more then 10% missing data
   - Testing GENIE3 on the data (might be too long)
   - Packages used by Thomas Dugé => corpcor / Parmigene knni.all
+  - Ran SAM on DREAM4 dataset (only 1 at the moment ; AUPR = 0.13)
+
+- **Day 11** :
+  - Improved R script for running tests on the real data previously filtered.
+  - Launched test of GENIE3 with relatively "low" parameters (K=5,nTrees=10) ~2h20 (run over 18 424 genes & 1042 exp)
+  - Relaunch SAM on the 5 datasets from DREAM4 => results tomorrow
+  - Reading : https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/#b19-bbi-10-2016-237 , https://ac.els-cdn.com/S1476927104001082/1-s2.0-S1476927104001082-main.pdf?_tid=3774c203-5cca-46dd-93d0-23153fcf1ac6&acdnat=1552917008_260409a181b0c2af90185c5fd11e871c
+  - From scikitlearn watch DBSCAN. (clustering method)

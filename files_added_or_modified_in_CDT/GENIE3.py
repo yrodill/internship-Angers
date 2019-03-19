@@ -79,9 +79,10 @@ class GENIE3(GraphModel):
 
     .. note::
        Ref:
-       J. Peters, J. Mooij, D. Janzing, B. Schölkopf:
-       Causal Discovery with Continuous Additive Noise Models,
-       JMLR 15:2009-2053, 2014.
+       Huynh-Thu V, Irrthum A, Wehenkel L, Geurts P (2010). “Inferring regulatory networks from expression data using tree-based methods.” PLoS ONE, 5(9), e12776. doi: 10.1371/journal.pone.0012776.
+
+       Aibar S, Bravo Gonzalez-Blas C, Moerman T, Huynh-Thu V, Imrichova H, Hulselmans G, Rambow F, Marine J, Geurts P, Aerts J, van den Oord J, Kalender Atak Z, Wouters J, Aerts S (2017). “SCENIC: Single-Cell Regulatory Network Inference And Clustering.” Nature Methods, 14, 1083-1086. doi: 10.1038/nmeth.4463.
+
 
     .. warning::
        This implementation of GENIE3 does not support starting with a graph.
