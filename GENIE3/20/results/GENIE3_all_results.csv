@@ -1,0 +1,6 @@
+/home/bothorel/CausalGen/gSAM/GENIE3/20/Report-GENIE3-expfinal_gp_mix_20.csv,gp_mix,Mean :0.4641373860368514,Std dev: 0.08111869953099943
+/home/bothorel/CausalGen/gSAM/GENIE3/20/Report-GENIE3-expfinal_linear_20.csv,linear,Mean :0.27118172264139534,Std dev: 0.052865430644600746
+/home/bothorel/CausalGen/gSAM/GENIE3/20/Report-GENIE3-expfinal_gp_add_20.csv,gp_add,Mean :0.4693075822729297,Std dev: 0.038601016293957555
+/home/bothorel/CausalGen/gSAM/GENIE3/20/Report-GENIE3-expfinal_NN_20.csv,NN,Mean :0.3121672552438422,Std dev: 0.04133516195274199
+/home/bothorel/CausalGen/gSAM/GENIE3/20/Report-GENIE3-expfinal_sigmoid_add_20.csv,sigmoid_add,Mean :0.3961395205607886,Std dev: 0.04916044302492981
+/home/bothorel/CausalGen/gSAM/GENIE3/20/Report-GENIE3-expfinal_sigmoid_mix_20.csv,sigmoid_mix,Mean :0.2361311510417458,Std dev: 0.019729929878420947

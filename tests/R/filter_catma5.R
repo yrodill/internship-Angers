@@ -61,7 +61,7 @@ gen3 <- prepare_dataset(gen3)
 ??GENIE3
 library("GENIE3")
 set.seed(123)
-wMat <- GENIE3(gen3,nTrees = 10 , K=5,nCores=1,verbose=TRUE)
+wMat <- GENIE3(gen3, verbose=TRUE)
 
 linkList <- getLinkList(wMat)
 

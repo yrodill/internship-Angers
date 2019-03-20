@@ -1,0 +1,11 @@
+File,Model,AUPR,SHD 0.1,SHD 0.2,SHD 0.3,SHD 0.4,SHD 0.5,SHD 0.6,SHD 0.7,SHD 0.8,SHD 0.9,DAG 0.1,DAG 0.2,DAG 0.3,DAG 0.4,DAG 0.5,DAG 0.6,DAG 0.7,DAG 0.8,DAG 0.9
+gp_add-20-0_data.csv,GENIE3,0.49166422338059956,51.0,37.0,34.0,37.0,38.0,38.0,38.0,38.0,38.0,False,False,True,True,True,True,True,True,True
+gp_add-20-1_data.csv,GENIE3,0.508937294283904,43.0,43.0,39.0,43.0,43.0,43.0,43.0,43.0,43.0,False,False,True,True,True,True,True,True,True
+gp_add-20-9_data.csv,GENIE3,0.4218187041341383,60.0,46.0,46.0,47.0,47.0,47.0,47.0,47.0,47.0,False,False,False,True,True,True,True,True,True
+gp_add-20-6_data.csv,GENIE3,0.470666813205357,56.0,47.0,50.0,52.0,52.0,52.0,52.0,52.0,52.0,False,False,True,True,True,True,True,True,True
+gp_add-20-3_data.csv,GENIE3,0.4004906821885078,51.0,41.0,44.0,44.0,44.0,44.0,44.0,44.0,44.0,False,False,False,False,True,True,True,True,True
+gp_add-20-8_data.csv,GENIE3,0.47556804679358766,53.0,47.0,46.0,47.0,48.0,48.0,48.0,48.0,48.0,False,False,True,True,True,True,True,True,True
+gp_add-20-7_data.csv,GENIE3,0.46684079652496613,59.0,40.0,48.0,47.0,47.0,48.0,48.0,48.0,48.0,False,False,False,True,True,True,True,True,True
+gp_add-20-4_data.csv,GENIE3,0.44236510915795696,59.0,41.0,41.0,43.0,43.0,43.0,43.0,43.0,43.0,False,False,False,False,True,True,True,True,True
+gp_add-20-5_data.csv,GENIE3,0.5257976601929054,47.0,24.0,28.0,30.0,31.0,31.0,31.0,31.0,31.0,False,False,True,True,True,True,True,True,True
+gp_add-20-2_data.csv,GENIE3,0.48892649286737366,50.0,40.0,41.0,44.0,44.0,44.0,44.0,44.0,44.0,False,False,True,True,True,True,True,True,True
