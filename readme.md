@@ -73,3 +73,9 @@
   - R package WGCNA (clustering method) => R script test_WGCNA to be continued
   - https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/ , https://www.rdocumentation.org/packages/WGCNA/versions/1.66 , http://pklab.med.harvard.edu/scw2014/WGCNA.html
   - Connection to cluster of calc presented by O.Goudet !
+
+- **Day 13** :
+  - Tried to install R/Rstudio on the SSH (conda py35 env) => ulimit to low to launch R on the env and R version to old to install all the required packages
+  - genie3_gathered_results.py => script that calculate mean and std dev for each exp (mean over 10 datasets)
+  - Add a line in cdt_algs.py (123) to store the matrix used for AUPR plot
+  - GENIE3 running on size100 (~1h10/file)
