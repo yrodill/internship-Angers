@@ -1,0 +1,11 @@
+File,Model,AUPR,SHD 0.1,SHD 0.2,SHD 0.3,SHD 0.4,SHD 0.5,SHD 0.6,SHD 0.7,SHD 0.8,SHD 0.9,DAG 0.1,DAG 0.2,DAG 0.3,DAG 0.4,DAG 0.5,DAG 0.6,DAG 0.7,DAG 0.8,DAG 0.9
+syntrenHop1_20_8_data.csv,GENIE3,0.17534739087236922,72.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,False,False,True,True,True,True,True,True,True
+syntrenHop1_20_7_data.csv,GENIE3,0.22000635941840418,71.0,26.0,22.0,20.0,20.0,20.0,20.0,20.0,20.0,False,False,False,True,True,True,True,True,True
+syntrenHop1_20_3_data.csv,GENIE3,0.3735796513045232,56.0,24.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,False,False,False,False,False,True,True,True,True
+syntrenHop1_20_5_data.csv,GENIE3,0.2888090163703234,63.0,31.0,23.0,23.0,23.0,22.0,23.0,23.0,23.0,False,False,False,False,False,True,True,True,True
+syntrenHop1_20_1_data.csv,GENIE3,0.19561778465404028,73.0,32.0,24.0,24.0,24.0,24.0,24.0,24.0,24.0,False,False,True,True,True,True,True,True,True
+syntrenHop1_20_9_data.csv,GENIE3,0.30242474675270126,73.0,24.0,22.0,23.0,23.0,23.0,23.0,23.0,23.0,False,False,True,True,True,True,True,True,True
+syntrenHop1_20_6_data.csv,GENIE3,0.19260529402426,68.0,26.0,24.0,22.0,22.0,22.0,22.0,22.0,22.0,False,False,True,True,True,True,True,True,True
+syntrenHop1_20_2_data.csv,GENIE3,0.17219916380086753,66.0,22.0,22.0,23.0,23.0,22.0,22.0,22.0,22.0,False,False,False,True,True,True,True,True,True
+syntrenHop1_20_0_data.csv,GENIE3,0.1562284171058627,67.0,24.0,25.0,25.0,22.0,22.0,22.0,22.0,22.0,False,False,False,False,True,True,True,True,True
+syntrenHop1_20_4_data.csv,GENIE3,0.25844082184929595,75.0,43.0,34.0,34.0,34.0,34.0,34.0,34.0,34.0,False,False,False,False,False,True,True,True,True

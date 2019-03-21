@@ -79,3 +79,10 @@
   - genie3_gathered_results.py => script that calculate mean and std dev for each exp (mean over 10 datasets)
   - Add a line in cdt_algs.py (123) to store the matrix used for AUPR plot
   - GENIE3 running on size100 (~1h10/file)
+
+- **Day 14** :
+  - Problem with the compilation of hrr (tried to install openmpi/mpicc)
+  - 2 little scripts to normalize files downloaded to the same format as T.Dugé. (GO annot/PPI interactions)
+  - Couldn't use the cluster (JM not here today)
+  - Ran GENIE3 on all syntren data
+  - Launching GENIE3 on the biological data

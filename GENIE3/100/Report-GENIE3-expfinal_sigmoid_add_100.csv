@@ -1,0 +1,11 @@
+File,Model,AUPR,SHD 0.1,SHD 0.2,SHD 0.3,SHD 0.4,SHD 0.5,SHD 0.6,SHD 0.7,SHD 0.8,SHD 0.9,DAG 0.1,DAG 0.2,DAG 0.3,DAG 0.4,DAG 0.5,DAG 0.6,DAG 0.7,DAG 0.8,DAG 0.9
+sigmoid_add-100-9_data.csv,GENIE3,0.3497272110436001,280.0,279.0,277.0,278.0,278.0,278.0,278.0,278.0,278.0,False,False,True,True,True,True,True,True,True
+sigmoid_add-100-2_data.csv,GENIE3,0.2892614608631785,243.0,219.0,223.0,223.0,223.0,223.0,223.0,223.0,223.0,False,False,False,True,True,True,True,True,True
+sigmoid_add-100-0_data.csv,GENIE3,0.32416724666600105,234.0,226.0,226.0,227.0,228.0,228.0,228.0,228.0,228.0,False,False,False,True,True,True,True,True,True
+sigmoid_add-100-3_data.csv,GENIE3,0.3600285014327784,258.0,253.0,254.0,254.0,254.0,254.0,254.0,254.0,254.0,False,False,False,True,True,True,True,True,True
+sigmoid_add-100-8_data.csv,GENIE3,0.31905883784605954,260.0,246.0,248.0,249.0,249.0,249.0,249.0,249.0,249.0,False,False,True,True,True,True,True,True,True
+sigmoid_add-100-5_data.csv,GENIE3,0.29285918204191913,220.0,203.0,205.0,207.0,207.0,207.0,207.0,207.0,207.0,False,False,True,True,True,True,True,True,True
+sigmoid_add-100-6_data.csv,GENIE3,0.3210130778443145,244.0,236.0,237.0,238.0,238.0,238.0,238.0,238.0,238.0,False,False,True,True,True,True,True,True,True
+sigmoid_add-100-7_data.csv,GENIE3,0.3262064436015667,249.0,230.0,229.0,229.0,229.0,229.0,229.0,229.0,229.0,False,False,True,True,True,True,True,True,True
+sigmoid_add-100-1_data.csv,GENIE3,0.323581411555307,259.0,245.0,244.0,245.0,245.0,245.0,245.0,245.0,245.0,False,False,False,True,True,True,True,True,True
+sigmoid_add-100-4_data.csv,GENIE3,0.3081284513004707,245.0,232.0,234.0,234.0,234.0,234.0,234.0,234.0,234.0,False,False,True,True,True,True,True,True,True
