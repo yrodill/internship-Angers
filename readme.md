@@ -86,3 +86,6 @@
   - Couldn't use the cluster (JM not here today)
   - Ran GENIE3 on all syntren data
   - Launching GENIE3 on the biological data
+- **Day 15** :
+  - Launched DREAM4 on all alg
+  - GENIE3 still running on the 18 264 genes
