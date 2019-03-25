@@ -91,4 +91,7 @@
   - GENIE3 still running on the 18 424 genes
   - Installed R 3.5 on star242 => GENIE3 should be launchable
 - **Day 16** :
-  - All results for DREAM4 but a few buggged (look into it)
+  - All results for DREAM4 but a few bugged (look into it)
+  - All data written in the paper for GENIE3
+  - Launched gSAM-lin
+  - Tomorrow gSAM-mse && mse-lin
