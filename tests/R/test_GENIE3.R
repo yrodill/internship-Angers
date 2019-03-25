@@ -9,7 +9,7 @@ data <- t(data)
 
 rowOrder <- row.names(data)
 matriceOrder <- sort(rowOrder)
-View(rowOrder)
+#View(rowOrder)
 
 newOrder <- c()
 
@@ -41,5 +41,5 @@ weightMat <- weightMat[newOrder,newOrder]
 
 linkList <- getLinkList(weightMat)
 #View(linkList)
-write.csv(weightMat, file="~/internship-Angers/tests/results/weightMat.csv")
-write.table(linkList, file="~/internship-Angers/tests/results/linkList.txt", row.names=FALSE, col.names=TRUE,sep=",")
+write.csv(weightMat, file="/home/ua24906/internship-Angers/tests/results/weightMatCLUST.csv")
+#write.table(linkList, file="~/internship-Angers/tests/results/linkList.txt", row.names=FALSE, col.names=TRUE,sep=",")

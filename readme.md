@@ -88,4 +88,7 @@
   - Launching GENIE3 on the biological data
 - **Day 15** :
   - Launched DREAM4 on all alg
-  - GENIE3 still running on the 18 264 genes
+  - GENIE3 still running on the 18 424 genes
+  - Installed R 3.5 on star242 => GENIE3 should be launchable
+- **Day 16** :
+  - All results for DREAM4 but a few buggged (look into it)
