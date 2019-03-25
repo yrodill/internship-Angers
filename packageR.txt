@@ -1,0 +1,50 @@
+  920  sudo Rscript -e 'install.packages(c("V8","sfsmisc","clue","randomForest","lattice","devtools","MASS"),repos="http://cran.us.r-project.org")'
+  921  sudo Rscript -e 'install.packages("devtools")'
+  922  sudo Rscript -e 'install.packages("digest")'
+  923  sudo Rscript -e 'install.packages("devtools")'
+  924  sudo Rscript -e 'install.packages("pkgload")'
+  925  rstudio&
+  926  clear
+  927  sudo Rscript -e 'install.packages("pkgload")'
+  928  sudo Rscript -e 'install.packages("rlang")'
+  929  sudo Rscript -e 'install.packages("pkgload")'
+  930  sudo Rscript -e 'install.packages("backports")'
+  931  sudo Rscript -e 'install.packages("pkgload")'
+  932  sudo Rscript -e 'install.packages("devtools")'
+  933  sudo Rscript -e 'install.packages("fs")'
+  934  sudo Rscript -e 'install.packages("devtools")'
+  935  sudo Rscript -e 'install.packages("glue")'
+  936  sudo Rscript -e 'install.packages("devtools")'
+  937  sudo Rscript -e 'install.packages(c("V8","sfsmisc","clue","randomForest","lattice","devtools","MASS"),repos="http://cran.us.r-project.org")'
+  938  sudo Rscript -e 'install.packages("V8")'
+  939  sudo Rscript -e 'install.packages("curl")'
+  940  sudo Rscript -e 'install.packages("V8")'
+  941  sudo Rscript -e 'install.packages("jsonlite")'
+  942  sudo Rscript -e 'install.packages("V8")'
+  943  clear
+  944  sudo apt install libnode-dev
+  945  sudo apt-get install libnode-dev
+  946  sudo apt-get install libv8-3.14-dev
+  947  sudo apt-get install libv8-dev
+  948  sudo Rscript -e 'install.packages("dagitty")'
+  949  sudo Rscript -e 'install.packages("kpcalg")'
+  950  sudo Rscript -e 'install.packages("RSpectra")'
+  951  sudo Rscript -e 'install.packages("kpcalg")'
+  952  sudo Rscript -e 'install.packages("energy")'
+  953  sudo Rscript -e 'install.packages("kpcalg")'
+  954  sudo Rscript -e 'install.packages("kernlab")'
+  955  sudo Rscript -e 'install.packages("kpcalg")'
+  956  sudo Rscript -e 'install.packages("robustbase")'
+  957  sudo Rscript -e 'install.packages("kpcalg")'
+  958  sudo Rscript -e 'install.packages("igraph")'
+  959  sudo Rscript -e 'install.packages("kpcalg")'
+  960  sudo Rscript -e 'install.packages("RBGL")'
+  961  clear
+  962  sudo Rscript -e 'install.packages("kpcalg")'
+  963  sudo Rscript -e 'install.packages("bdsmatrix")'
+  964  sudo Rscript -e 'install.packages("kpcalg")'
+  965  sudo Rscript -e 'install.packages("fastICA")'
+  966  sudo Rscript -e 'install.packages("kpcalg")'
+  967  sudo Rscript -e 'install.packages("pcalg")'
+  968  sudo Rscript -e 'install.packages("kpcalg")'
+
