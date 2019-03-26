@@ -89,7 +89,7 @@ parameters={'lr':[0.01],
            'lambda2':[0.00001],
            'nh':[200],
            'dnh': [200],
-           'losstype':["fgan"],
+           'losstype':["mse"],
            'sampletype':["sigmoidproba"],
            'train_epochs':[10000],
            'test_epochs':[1000],
@@ -99,7 +99,7 @@ parameters={'lr':[0.01],
            'dagpenalization_increase':[0.001],
            'use_filter':[False],
            'filter_threshold':[0.5],
-           'linear':[False]}
+           'linear':[True]}
 
 # When key is false, do not consider elements in list.
 rules_exclusive = {'dagloss': ['dagpenalization', 'dagstart', 'dagpenalization_increase']}

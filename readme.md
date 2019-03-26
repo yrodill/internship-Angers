@@ -95,3 +95,9 @@
   - All data written in the paper for GENIE3
   - Launched gSAM-lin
   - Tomorrow gSAM-mse && mse-lin
+- **Day 17** :
+  - GENIE3 running on star245 (with 36cores) removed all missing values
+  - Launched all SAM algs on DREAM4 with star245
+  - Updated GO scripts to write json data that can be further used to comparate results with known GO annotations
+  - TO DO : abiotic/biotic stresses => sort by experience type
+  - launch GENIE3 on data but with 10% threshold for missing values and bootstrap option + random value for NAN
