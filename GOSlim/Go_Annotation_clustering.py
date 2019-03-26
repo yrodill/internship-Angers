@@ -1,4 +1,5 @@
 from copy import deepcopy
+import json
 
 """
 Benoît BOTHOREL
@@ -14,13 +15,17 @@ Liesecke, Franziska, et al.
 """
 
 dic={}
+listGenes=[]
 clusters=[]
 
+#parsing GOSLIM annotations to build reference files
 with open("ATH_GO_GOSLIM.txt") as annots:
     lines = annots.readlines()
 
     for l in lines:
         values = l.strip().split("\t")
+        if (values[0] not in listGenes):
+            listGenes.append(values[0])
         if (values[0] not in dic.keys()):
             dic[values[0]] = []
         if (values[3] == "involved in"):
@@ -28,7 +33,6 @@ with open("ATH_GO_GOSLIM.txt") as annots:
             if(values[4] not in clusters):
                 clusters.append(values[4])
 
-print(len(clusters))
 
 clusts={}
 for clust in clusters:
@@ -40,9 +44,31 @@ for clust in clusters:
     
     clusts[clust]=genes
 
+print(clusts)
 
-finalClust=[clusts[k] for k in clusts  if(len(clusts[k]) > 5 and len(clusts[k]) < 100) ]
+finalClust={}
+for GO in clusters:
+    finalClust[GO]={
+        "cluster":clusts[k] for k in clusts if(len(clusts[k]) > 5 and len(clusts[k]) < 100)
+        }
 
-print (finalClust)
+#print all go annotation and his related genes
+# for GO in finalClust:
+#     print("{} => {}".format(GO,finalClust[GO]["cluster"]))
+
+#write json files from data
+file={}
+for gene in listGenes:
+    file[gene]={
+        "GOTerms":[GO[0] for GO in dic[gene]],
+        "GONums":[GO[1] for GO in dic[gene]]
+    }
+
+with open("genes_list.json","w") as output:
+    json.dump(file,output)
+
+with open("clusters.json","w") as outfile:
+    json.dump(finalClust,outfile)
+
 print("Len clust raw: ",len(clusts))
 print("Len clust filtered : ",len(finalClust))

@@ -21,4 +21,22 @@ library("GENIE3")
 set.seed(123)
 wMat <- GENIE3(gen3, verbose=TRUE)
 
-linkList <- getLinkList(wMat,threshold=0.2)
+#linkList <- getLinkList(wMat,threshold=0.2)
+
+rowOrder <- row.names(gen3)
+matriceOrder <- sort(rowOrder)
+
+newOrder <- c()
+
+for(x in rowOrder){
+  index=1
+  for(y in matriceOrder){
+    if(x==y){
+      newOrder <- c(newOrder,index)
+    }
+    index<-index+1
+  }
+}
+
+wMat <- wMat[newOrder,newOrder]
+write.csv(wMat, file = '~/weightMat.csv',row.names=FALSE)
