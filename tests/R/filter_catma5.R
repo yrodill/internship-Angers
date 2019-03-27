@@ -8,6 +8,7 @@
 #' @param threshold Number between 0 and 1. Example : 0.1 means if there is more than 10% missing data for one gene, it is deleted from data. (default 0 = delete all row with at leats 1 missing value)
 #' @param stress Name of the stress used to filter your experiences (default "all") possible value => ["development","chemical treatment","abiotic","biotic"]
 #' @param ratio Value used for the bootstrap [0:1] (default 0.8)
+#' @param output Output file name (default "./weightedMatrix_Genie3.csv")
 #' @return Write a csv file containing the matrix of co-expression.
 #' @examples
 #' Rscript --vanilla /path/to/file /path/to/json
@@ -141,6 +142,7 @@ if (length(args)< 2) {
   args[4] = 0
   args[5] = "all"
   args[6] = 0.8
+  args[7] = "weightedMatrix_Genie3.csv"
 }
 
 #Load the file
@@ -176,7 +178,7 @@ print("Done...")
 #gen3_final <- replace_missing_values(gen3_boot,0.1)
 
 #Test sur sous-échantillon
-test_gen3 <- gen3_boot[1:200,1:300]
+test_gen3 <- gen3_boot[1:20,1:30]
 test_gen3 <- replace_missing_values(test_gen3,0.1)
 
 
@@ -191,6 +193,8 @@ matrix <- reorder(test_gen3,matrix)
 print("Done...")
 
 print("Writing matrix in the current folder...")
-write.csv(as.matrix(matrix), file = 'weightedMatrix_Genie3.csv')
+write.csv(as.matrix(matrix), file = args[7])
 print("Done...")
+
+quit(save = "default", status = 0, runLast = FALSE)
 
