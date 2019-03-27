@@ -86,18 +86,26 @@
   - Couldn't use the cluster (JM not here today)
   - Ran GENIE3 on all syntren data
   - Launching GENIE3 on the biological data
+
 - **Day 15** :
   - Launched DREAM4 on all alg
   - GENIE3 still running on the 18 424 genes
   - Installed R 3.5 on star242 => GENIE3 should be launchable
+
 - **Day 16** :
   - All results for DREAM4 but a few bugged (look into it)
   - All data written in the paper for GENIE3
   - Launched gSAM-lin
   - Tomorrow gSAM-mse && mse-lin
+
 - **Day 17** :
   - GENIE3 running on star245 (with 36cores) removed all missing values
   - Launched all SAM algs on DREAM4 with star245
   - Updated GO scripts to write json data that can be further used to comparate results with known GO annotations
   - TO DO : abiotic/biotic stresses => sort by experience type
   - launch GENIE3 on data but with 10% threshold for missing values and bootstrap option + random value for NAN
+
+- **Day 18** :
+  - DONE: R script for GENIE3 on biological updated / missing values / bootstrap
+  - GENIE3 re-launched on 36cores with 10% missing values.
+  - SAM DREAM4 almost done (missing multi 5)

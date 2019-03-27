@@ -90,12 +90,16 @@ bootstrap <- function(df,ratio){
 #Function to replace missing values by a random value from another experience for the same gene
 replace_missing_values <- function(df, threshold) {
   
+  total <- ncol(row)
+  pb <- txtProgressBar(min = 0, max = total, style = 3)
+  
   if(threshold == 0){
     return (df)
   }
   else{
     newcolumn <- 0
     for(row in 1:nrow(df)){
+      setTxtProgressBar(pb, row)
       for(col in 1:ncol(df)){
         if(df[row,col]=="" || is.na(df[row,col])){
           while(is.na(df[row,col])){
@@ -106,6 +110,7 @@ replace_missing_values <- function(df, threshold) {
       }
     }
   }
+  close(pb)
   return (df)
 }
 
