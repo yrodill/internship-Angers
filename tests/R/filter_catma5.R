@@ -178,18 +178,18 @@ print("Done...")
 #gen3_final <- replace_missing_values(gen3_boot,0.1)
 
 #Test sur sous-échantillon
-test_gen3 <- gen3_boot[1:20,1:30]
-test_gen3 <- replace_missing_values(test_gen3,0.1)
+#test_gen3 <- gen3_boot[1:20,1:30]
+#test_gen3 <- replace_missing_values(test_gen3,0.1)
 
 
 
 print("Running GENIE3 on the data...")
 set.seed(123)
-matrix <- GENIE3(test_gen3,nCores=as.numeric(args[3]),verbose=TRUE)
+matrix <- GENIE3(gen3_final,nCores=as.numeric(args[3]),verbose=TRUE)
 print("Done...")
 
 print("Re-ordering the matrix to fit the original order...")
-matrix <- reorder(test_gen3,matrix)
+matrix <- reorder(gen3_final,matrix)
 print("Done...")
 
 print("Writing matrix in the current folder...")
