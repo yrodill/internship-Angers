@@ -9,6 +9,7 @@
 #' @param stress Name of the stress used to filter your experiences (default "all") possible value => ["development","chemical treatment","abiotic","biotic"]
 #' @param ratio Value used for the bootstrap [0:1] (default 0.8)
 #' @param output Output file name (default "./weightedMatrix_Genie3.csv")
+#' @param regulators File containing the list of the regulators. (default NULL)
 #' @return Write a csv file containing the matrix of co-expression.
 #' @examples
 #' Rscript --vanilla /path/to/file /path/to/json
@@ -90,7 +91,7 @@ bootstrap <- function(df,ratio){
 #Function to replace missing values by a random value from another experience for the same gene
 replace_missing_values <- function(df, threshold) {
   
-  total <- ncol(row)
+  total <- nrow(df)
   pb <- txtProgressBar(min = 0, max = total, style = 3)
   
   if(threshold == 0){
@@ -133,6 +134,20 @@ reorder <- function(original,matrix){
     return (matrix[newOrder,newOrder])
 }
 
+#Function that computes the regulators from the given file
+get_regulators <- function(data,file){
+    df <- read.csv(file,sep="\t")
+    regs <- c()
+
+    for(gene in df$Gene_ID){
+        if(gene %in% rownames(data)){
+            regs <- c(regs,gene)
+        }
+    }
+    return(regs)
+}
+
+
 #MAIN
 args = commandArgs(trailingOnly=TRUE)
 
@@ -148,6 +163,9 @@ if (length(args)< 2) {
   args[5] = "all"
   args[6] = 0.8
   args[7] = "weightedMatrix_Genie3.csv"
+  args[8] = NULL
+}else if (length(args)>2 && length(args)<8){
+    stop("When you give more than 2 arguments you must provide all the others arguments", call.=FALSE)
 }
 
 #Load the file
@@ -185,12 +203,19 @@ print("Done...")
 #Test sur sous-échantillon
 #test_gen3 <- gen3_boot[1:20,1:30]
 #test_gen3 <- replace_missing_values(test_gen3,0.1)
-
+if(is.null(str(args[8]))){
+    regs <- NULL
+    print("No regulators given, step skipped...")
+}else{
+    print("Loading the regulators...")
+    regs <- get_regulators(gen3_final,args[8])
+    print("Done...")
+}
 
 
 print("Running GENIE3 on the data...")
 set.seed(123)
-matrix <- GENIE3(gen3_final,nCores=as.numeric(args[3]),verbose=TRUE)
+matrix <- GENIE3(gen3_final,nCores=as.numeric(args[3]),verbose=TRUE,regulators=regs)
 print("Done...")
 
 print("Re-ordering the matrix to fit the original order...")
@@ -203,3 +228,4 @@ print("Done...")
 
 quit(save = "default", status = 0, runLast = FALSE)
 
+devtools::document()
