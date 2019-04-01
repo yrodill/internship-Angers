@@ -109,3 +109,9 @@
   - DONE: R script for GENIE3 on biological updated / missing values / bootstrap
   - GENIE3 re-launched on 36cores with 10% missing values.
   - SAM DREAM4 almost done (missing multi 5)
+
+- **Day 19 & 20** :
+  - All DREAM4 results for SAM done.
+  - I used the python script from https://github.com/vahuynh repositery and adapted the R script that filters the data.
+  - Launched the "genie3_bio.slurm" script for the weekend
+  - All results are in (Stargate/GENIE3/biological_results or in catma5 directory)
