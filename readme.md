@@ -115,3 +115,8 @@
   - I used the python script from https://github.com/vahuynh repositery and adapted the R script that filters the data.
   - Launched the "genie3_bio.slurm" script for the weekend
   - All results are in (Stargate/GENIE3/biological_results or in catma5 directory)
+
+- **Day 21** :
+  - Tout savoir sur les puces à ADN => http://biochimej.univ-angers.fr/Page2/COURS/9ModulGenFoncVeg/5MethEtudGenFonc/3PucesADN/1PucesADN.htm
+  - Script relancé, bug à cause d'une erreur debilé pour la sauvegarde des résultats de GENIE3
+  - Début de script pour récupérer la liste des liens entre gènes avec get_link_list de GENIE3
