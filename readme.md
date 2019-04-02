@@ -118,5 +118,11 @@
 
 - **Day 21** :
   - Tout savoir sur les puces à ADN => http://biochimej.univ-angers.fr/Page2/COURS/9ModulGenFoncVeg/5MethEtudGenFonc/3PucesADN/1PucesADN.htm
-  - Script relancé, bug à cause d'une erreur debilé pour la sauvegarde des résultats de GENIE3
+  - Script relancé, bug à cause d'une erreur debile pour la sauvegarde des résultats de GENIE3
   - Début de script pour récupérer la liste des liens entre gènes avec get_link_list de GENIE3
+
+- **Day 22** :
+  - Résultats obtenus pour tout sauf la catégorie "biotic" (relancée)
+  - Scripts pour run les algos MI et PearsonCor sur les matrices des tests pour GENIE3 et DREAM4
+  - GENIE3 lancé sur DREAM4
+  - TO DO : Finir le script pour avoir les link_list
