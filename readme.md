@@ -126,3 +126,8 @@
   - Scripts pour run les algos MI et PearsonCor sur les matrices des tests pour GENIE3 et DREAM4
   - GENIE3 lancé sur DREAM4
   - TO DO : Finir le script pour avoir les link_list
+
+- **Day 23** :
+  - 2 news scripts : to get the links of the GENIE3's results & one to make a SIF file from those link list
+  - Tomorrow try to use cytoscape with SIF format !
+  - Launched GENIE3 on IRef (will have to launch on ratio too)
