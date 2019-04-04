@@ -135,3 +135,5 @@
 - **Day 24** :
   - Started to use Cytoscape to represent the networks
   - Launched GENIE3 on the ratio file.
+  - Keep looking at the results on cytoscape.
+  - Compare Iref & Isample ?
