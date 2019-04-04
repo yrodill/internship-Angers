@@ -131,3 +131,7 @@
   - 2 new scripts : to get the links of the GENIE3's results & one to make a SIF file from those link list
   - Tomorrow try to use cytoscape with SIF format !
   - Launched GENIE3 on IRef (will have to launch on ratio too)
+
+- **Day 24** :
+  - Started to use Cytoscape to represent the networks
+  - Launched GENIE3 on the ratio file.

@@ -1,0 +1,33 @@
+WT : wild type
+WS /Ler /Col0 : lignées suavages d'AT
+DML6 :
+CD :
+BXLS :
+BXHS :
+CCR :
+R & F: racines(roots) et feuilles(leaves) (au niveau des expériences avec le cadmium)
+TRV :  infection avec un virus
+ABA : absicic acid
+NCED6 :
+Fb1,Myr,DMS,TSP : (inhibiteurs du pathway des sphingolipides)
+NXCY : nitrate + concentration ; sucrose + concentration
+C2TS,V2BC,C4TS : (gene silencing suppressor)
+GDH : 
+SQE1 :
+Ab_mkkc5/MKK2/MKK2EE :
+iku : haiku mutant (seed of reduced size)
+U73343/U73122 : noms des composés(inhibiteurs des phospholipases)
+BOU :
+GABA : gamma-aminobutyrique acid 
+ / pop2 / Ost : 
+ZIP9 : metal ion transporter family
+fry2 :
+MET2 :
+MPK :
+BB :
+cytGR : cytosol - gene GR
+cat2xcad2 :
+TOR : target of rapamycin (mutant 7846 weak ou 7817 strong)
+LAR :
+HR : 
+QPRT :
