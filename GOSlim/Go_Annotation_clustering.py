@@ -5,13 +5,6 @@ import json
 Benoît BOTHOREL
 GO annotation genes clustering
 19/03/2019
-
-Ref::
-Liesecke, Franziska, et al. 
-"Ranking genome-wide correlation measurements improves microarray and
- RNA-seq based global and targeted co-expression networks."
- Sci. Rep., vol. 8, no. 1, 18 July 2018, p. 10885, 
- doi:10.1038/s41598-018-29077-3.
 """
 
 dic={}
@@ -63,6 +56,16 @@ for gene in listGenes:
         "GOTerms":[GO[0] for GO in dic[gene]],
         "GONums":[GO[1] for GO in dic[gene]]
     }
+
+#Remove duplicates
+for gene in listGenes:
+    for term in file[gene]:
+        uniq = []
+        for go in file[gene][term]:
+            if go not in uniq:
+                uniq.append(go)
+        file[gene][term]=uniq
+
 
 with open("genes_list.json","w") as output:
     json.dump(file,output)
