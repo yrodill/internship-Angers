@@ -137,3 +137,8 @@
   - Launched GENIE3 on the ratio file.
   - Keep looking at the results on cytoscape.
   - Compare Iref & Isample ?
+
+- **Day 25** :
+  - Compared the results : Links between Isample and Ratio are conserved (5000 links)
+  - Check for 5000 all with coloration (apparently it might be a bit messy here)
+  - Monday 2pm meeting
