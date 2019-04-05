@@ -13,15 +13,17 @@ from tqdm import tqdm
 parser = argparse.ArgumentParser(description='Process some integers.')
 
 parser.add_argument('folder', metavar='d', type=str, help='Folder containing the data')
+parser.add_argument('experience', metavar='d', type=str, help='Experience to process')
 parser.add_argument('--nLinks', metavar='l',type=int, default=10000, help='Maximum number of links to show (default 10 000)')
 parser.add_argument('--threshold', metavar='l',type=float, default=0.05, help='Threshold percentage of max value (default = 0.05)')
 
 args = parser.parse_args()
 
-with open("filtered_data_{}_genie3.csv".format(args.folder.split("/")[-1])) as f:
+
+with open("./{}/filtered_data_{}_genie3.csv".format(args.folder,args.experience)) as f:
     genesNames = f.readline().strip().split(',')
 
-for file in glob.glob(args.folder + "/*wmat*"):
+for file in glob.glob(args.folder + "/" + args.experience + "/*wmat*"):
     print("Reading file...")
     df = pd.read_csv(file)
     print("Done...")
@@ -75,6 +77,6 @@ else:
     print("The link list has less values than your selected max number of links, select lesser threshold value to increase the number of results")
 
 print("Writing the result...")
-links.to_csv("{}/list_link_{}_{}_{}.csv".format(args.folder.split("/")[-1],args.folder.split("/")[-1],args.nLinks,args.threshold),index=False)
+links.to_csv("{}/{}/list_link_{}_{}_{}.csv".format(args.folder,args.experience,args.experience,args.nLinks,args.threshold),index=False)
 print("Done...")
 
