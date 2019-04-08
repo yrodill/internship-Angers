@@ -142,3 +142,11 @@
   - Compared the results : Links between Isample and Ratio are conserved (5000 links)
   - Check for 5000 all with coloration (apparently it might be a bit messy here)
   - Monday 2pm meeting
+
+- **Day 26** :
+  - Meeting at 2pm : find a way to choose the cluster from genie3 results => (WGCNA ?)
+  - How many links should be used to make the cluster => distribution of the scores
+  - List of genes of interest for them => should be given soon
+  - Check evidence codes for GO annot : filter transcriptomic
+  - Look at a possible separation between root & leaf (if enough experiences for root)
+  - Look at T.Dugé GO enrichment function
