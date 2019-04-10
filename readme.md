@@ -156,3 +156,8 @@
   - igraph : clustering methods (R script to try it)
   - Cytoscape.js could be used for the clustering / representation (http://js.cytoscape.org/#nodes.hierarchicalClustering)
   - tried to use T.Dugé script ; problems with the R libraries and the arguments to pass to the script
+
+- **Day 28** :
+  - TO DO : try to use the part with GO & AUROC from network_analysis_v2.R
+  - (Arrêt maladie jusqu'au vendredi inclus)
+  - other methods for enrichment : https://bioinfo-fr.net/lannotation-de-regions-genomiques-et-les-analyses-denrichissement
