@@ -150,3 +150,9 @@
   - Check evidence codes for GO annot : filter transcriptomic
   - Look at a possible separation between root & leaf (if enough experiences for root)
   - Look at T.Dugé GO enrichment function
+
+- **Day 27** :
+  - script to plot the scores values from GENIE3 results => ~1000links max
+  - igraph : clustering methods (R script to try it)
+  - Cytoscape.js could be used for the clustering / representation (http://js.cytoscape.org/#nodes.hierarchicalClustering)
+  - tried to use T.Dugé script ; problems with the R libraries and the arguments to pass to the script
