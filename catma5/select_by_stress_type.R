@@ -9,7 +9,6 @@
 #' @param stress Name of the stress used to filter your experiences (default "all") possible value => ["development","chemical treatment","abiotic","biotic"]
 #' @param ratio Value used for the bootstrap [0:1] (default 0.8)
 #' @param output Output file name (default "./weightedMatrix_Genie3.csv")
-#' @param regulators File containing the list of the regulators. (default NULL)
 #' @return Write a csv file containing the matrix of co-expression.
 #' @examples
 #' Rscript --vanilla /path/to/file /path/to/json
@@ -155,8 +154,8 @@ args = commandArgs(trailingOnly=TRUE)
 #Load libraries
 library("rjson")
 #library("GENIE3")
-library("randomForest")
-source("GENIE3.R")
+# library("randomForest")
+# source("GENIE3.R")
 
 if (length(args)< 2) {
   stop("At least two arguments must be supplied (input file path and json file path)", call.=FALSE)
@@ -166,8 +165,7 @@ if (length(args)< 2) {
   args[5] = "all"
   args[6] = 0.8
   args[7] = "weightedMatrix_Genie3.csv"
-  args[8] = NULL
-}else if (length(args)>2 && length(args)<8){
+}else if (length(args)>2 && length(args)<7){
     stop("When you give more than 2 arguments you must provide all the others arguments", call.=FALSE)
 }
 
@@ -191,15 +189,15 @@ print("Done...")
 #dim(gen3_filtered)
 
 #Bootstrap à 80% des données
-print("Boostraping the data according to the selected ratio...")
-gen3_boot <- bootstrap(gen3_filtered,as.numeric(args[6]))
-print("Done...")
+# print("Boostraping the data according to the selected ratio...")
+# gen3_boot <- bootstrap(gen3_filtered,as.numeric(args[6]))
+# print("Done...")
 #gen3_boot <- bootstrap(gen3_filtered,0.8)
 #dim(gen3_boot)
 
 #Replace missing values by random value from the gene expression
 print("Replacing missing values by a random value from same row but another column...")
-gen3_final <- replace_missing_values(gen3_boot,as.numeric(args[4]))
+gen3_final <- replace_missing_values(gen3_filtered,as.numeric(args[4]))
 print("Done...")
 #gen3_final <- replace_missing_values(gen3_boot,0.1)
 
@@ -226,7 +224,7 @@ print("Done...")
 # print("Done...")
 
 print("Writing matrix in the current folder...")
-write.csv(as.matrix(gen3_final), file = args[7])
+write.csv(as.matrix(t(gen3_final)), file = args[7],row.names = FALSE)
 print("Done...")
 
 quit(save = "default", status = 0, runLast = FALSE)

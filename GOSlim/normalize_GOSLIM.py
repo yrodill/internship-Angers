@@ -50,13 +50,16 @@ the object type is the prefix, followed by a unique accession number(e.g. gene:1
 15. Date annotated: date the annotation was made.
 """
 
+pairs = []
 
 with open("ATH_GO_GOSLIM.txt") as annots:
     lines = annots.readlines()
 
 with open("ATH_GO_normalized.csv","w")as output:
-    for l in lines:
-        values = l.strip().split("\t")
-        if (values[13] == "TAIR"):
-            output.write("{}10\t{}\t{}\n".format(values[13],values[0],values[5]))
+	for l in lines:
+		values = l.strip().split("\t")
+		if(values[13] == "TAIR"):
+			if([values[0],values[5]] not in pairs):
+				pairs.append([values[0],values[5]])
+				output.write("{}10\t{}\t{}\n".format(values[13],values[0],values[5]))
 
