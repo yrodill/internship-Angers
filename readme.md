@@ -166,3 +166,8 @@
   - The results from the GO enrichment gives 0.5 => meaning that the terms would be the same if due to random picking. Investigate the problem.
   - Started a script to launch MI and PC on the data in order to compare with GENIE3 results.
   - TO DO : Maybe try to use HRR later to compare scores. => https://www.nature.com/articles/s41598-018-29077-3
+
+- **Day 30** :
+  - still working on the GO enrichment
+  - find a way to paralellize the computations for MI and PearsonCorr on the full matrix
+  - maybe foresee using another method to calculate genes correlation (from intensity & ratio)
