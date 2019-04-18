@@ -175,3 +175,8 @@
 - **Day 31** : 
   - Maybe the clustering isn't good before the GBA run.
   - To test : Pearson & MI on datasets.
+
+- **Day 32** : 
+  - Few more scripts to sort by genes of interest.
+  - Launch SAM on those data filtered by genes/exp
+  - Look at Pearson resulsts ...
