@@ -171,3 +171,7 @@
   - still working on the GO enrichment
   - find a way to paralellize the computations for MI and PearsonCorr on the full matrix
   - maybe foresee using another method to calculate genes correlation (from intensity & ratio)
+
+- **Day 31** : 
+  - Maybe the clustering isn't good before the GBA run.
+  - To test : Pearson & MI on datasets.
