@@ -23,20 +23,16 @@ data = pd.read_csv(args.data, sep=',',header=None,skiprows=1)
 print("Done...")
 
 def job_function(data,args,l):
+    result=[]
     if(args.model == "MI"):
         model = MIRegression()
     else:
         model = PearsonCorrelation()
-    print("Avancement : {:.2f}%".format(l/(len(data.columns)**2)*100))
-    i = l//len(data.columns)
-    j = l%len(data.columns)
-    if(i == j):
-        return [i,j,1]
-    elif(i > j):
-        return [i,j,0]
-    else:
-        return([i,j,model.predict(data[i].values, data[j].values)])
-    
+
+    for idx_i, i in enumerate(data.columns):
+            for idx_j, j in enumerate(data.columns[idx_i+1:]):
+                result.append([i,j,model.predict(data[i].values, data[j].values)])
+    return result
   
 
 
@@ -47,11 +43,11 @@ print("Done..")
 # print(results)
 print(len(results))
 
-final=[]
-for i in range(len(data.columns)**2):
-    final.append(results[i][2])
+# final=[]
+# for i in range(len(data.columns)**2):
+#     final.append(results[i][2])
 
-report = pd.DataFrame(final)
+report = pd.DataFrame(results)
 report.to_csv("data/test_parallel3.csv",index=False,header=False)
 # # Compute scores:
 # scores = []

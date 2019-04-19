@@ -180,3 +180,7 @@
   - Few more scripts to sort by genes of interest.
   - Launch SAM on those data filtered by genes/exp
   - Look at Pearson resulsts ...
+
+- **Day 33** :
+  - SAM launched on Ratio filtered by gen/exp ; results available Tuesday
+  - pearson/mi not working ...
