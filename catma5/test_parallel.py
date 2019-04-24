@@ -38,7 +38,7 @@ def job_function(data,args,l):
 
 # Exec computations
 print("Launch parallelization...")
-results = Parallel(n_jobs=4)(delayed(job_function)(data,args,l) for l in range(len(data.columns)**2))
+results = Parallel(n_jobs=2)(delayed(job_function)(data,args,l) for l in range(len(data.columns)**2))
 print("Done..")
 # print(results)
 print(len(results))

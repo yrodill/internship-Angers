@@ -32,6 +32,32 @@ plot(g_eigen, g2, col = membership(g_greed),mark.groups = communities(g_greed),e
 modularity(g_clust)
 modularity(g_greed)
 
-for(i in 1:412){
-  print(g_clust[i])
+
+clusters <- c()
+for(i in 1:length(g_clust)){
+  if(length(g_clust[i]$'1')>2){
+  clusters <- c(clusters,g_clust[i])
+  }
 }
+
+clusters.greed <- c()
+for(i in 1:length(g_greed)){
+  if(length(g_greed[i]$'1')>2){
+    clusters.greed <- c(clusters.greed,g_greed[i])
+  }
+}
+
+for(i in clusters.greed){
+     print(i)
+  }
+
+membership(g_greed)
+
+phylo <- as_phylo(g_greed)
+plot_dendrogram(g_greed,mode='phylo')
+
+ss01 <- cut(as.dendrogram(g_greed), h=2)
+
+matrix <- as.matrix(clusters.greed)
+write.csv(matrix,file="data.csv")
+getwd()

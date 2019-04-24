@@ -179,8 +179,21 @@
 - **Day 32** : 
   - Few more scripts to sort by genes of interest.
   - Launch SAM on those data filtered by genes/exp
-  - Look at Pearson resulsts ...
+  - Look at Pearson results ...
 
 - **Day 33** :
   - SAM launched on Ratio filtered by gen/exp ; results available Tuesday
   - pearson/mi not working ...
+
+- **Day 34** :
+  - Sam still running on the dataset
+  - Looking at DBSCAN and HDBSCAN for clustering (maybe another method must be used, on the dataset, to get a good distance matrix)
+  - Must test MI/Pearson when the CPUs are free haha.
+
+- **Day 35** :
+  - SAM results on Ratio_filtered_by_exp_by_genes : ok
+  - Glay algorithm used to make the clustering of the GENIE3 results
+  - Glay uses edge betweeness (Girvan-Newman algorithm)
+  - One cluster with the genes of interest found. (but only a few ~20/80)
+  - Bingo on the subclusters found by Glay
+  - Maybe try fast greedy on list link 5000 biotic ratio (R script)

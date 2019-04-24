@@ -3,7 +3,9 @@ import pandas as pd
 import glob
 from tqdm import tqdm
 
-"""Written by Benoît Bothorel 
+"""Written by Benoît Bothorel
+This script allows to get all the links sorted by score
+with both of the genes in relation from file result (launched with GENIE3 in the first place)
  -> benbotho@gmail.com for any questions
  03/04/2019
 """
