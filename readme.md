@@ -197,3 +197,8 @@
   - One cluster with the genes of interest found. (but only a few ~20/80)
   - Bingo on the subclusters found by Glay
   - Maybe try fast greedy on list link 5000 biotic ratio (R script)
+
+- **Day 36** :
+  - Some Cytoscape representations made : comparison between clusters from fast_greedy (igraph) and GLay
+  - Meeting at 10am => work on the validation via GO enrichment (and pathways ?)
+  - Analyzing the workflow of the validation test precisely (to be continued)

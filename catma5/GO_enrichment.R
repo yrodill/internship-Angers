@@ -240,14 +240,16 @@ predictions <- function(genes.labels, network) {
 
 
 
-df <- as.matrix(read.csv(file="/home/bothorel/internship-Angers/catma5/biological_results/ISample/all/list_link_all_5000_0.05.csv"))
+df <- as.matrix(read.csv(file="/home/bothorel/internship-Angers/catma5/biological_results/Ratio/biotic/list_link_biotic_5000_0.05.csv"))
 g <- simplify(graph_from_data_frame(df,directed=F))
 vertex.number<-length(V(g)$name)
 edge.number<-length(E(g))
 mean.degree<-mean(degree(g))
 
-agrigo<-read.table("/home/bothorel/internship-Angers/catma5/data/GOagri_term_Arabidopsis_thaliana", sep="", header=F)
-#agrigo<-read.csv("/home/bothorel/internship-Angers/GOSlim/ATH_GO_normalized.csv", sep="\t")
+#agrigo<-read.table("/home/bothorel/internship-Angers/catma5/data/GOagri_term_Arabidopsis_thaliana", sep="", header=F)
+#agrigo<-read.csv("/home/bothorel/internship-Angers/GOSlim/ATH_GO_normalized.csv", sep="\t",header=F)
+agrigo<-read.csv("/home/bothorel/internship-Angers/GOSlim/ATH_GO_Full_normalized.csv", sep="\t",header=F)
+
 
 agrigo<-subset(agrigo, agrigo[,2] %in% V(g)$name)
 GO.eff<-table(agrigo[,3])
@@ -287,7 +289,7 @@ pval<-apply(table.hyper, 1, function(x){
 
 pvaladjust<-p.adjust(pval, method="BH")
 go.list.table<-cbind(table.hyper, pvaladjust)
-go.list.table<-go.list.table[go.list.table[,3]<0.05,,drop=F]
+go.list.table<-go.list.table[go.list.table[,3]<1,,drop=F]
 number.enriched.go.global<-nrow(go.list.table)
 
 

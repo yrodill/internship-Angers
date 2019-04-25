@@ -1,4 +1,4 @@
-df <- as.matrix(read.csv(file="/home/bothorel/internship-Angers/catma5/biological_results/Ratio/all/list_link_all_1000_0.05.csv"))
+df <- as.matrix(read.csv(file="/home/bothorel/internship-Angers/catma5/biological_results/Ratio/biotic/list_link_biotic_5000_0.05.csv"))
 
 library('igraph')
 g <- graph_from_data_frame(df,directed = TRUE)
@@ -59,5 +59,5 @@ plot_dendrogram(g_greed,mode='phylo')
 ss01 <- cut(as.dendrogram(g_greed), h=2)
 
 matrix <- as.matrix(clusters.greed)
-write.csv(matrix,file="data.csv")
+write.csv(as.matrix(membership(g_greed)),file="data.csv")
 getwd()
