@@ -61,7 +61,7 @@ with open("ATH_GO_Full_normalized.csv","w")as output:
 		values = l.strip().split("\t")
 		if(values[8] == "P"):
 			#avoid same pairs
-			if([values[9],values[4]] not in pairs):
+			if([values[9],values[4]] not in pairs and values[9][0:2] == "AT" and values[9][0:3] != "ATP" and values[9][0:3] != "AT-"):
 				pairs.append([values[0],values[4]])
 				output.write("TAIR\t{}\t{}\n".format(values[9],values[4]))
 print("Done...")

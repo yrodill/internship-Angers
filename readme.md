@@ -202,3 +202,8 @@
   - Some Cytoscape representations made : comparison between clusters from fast_greedy (igraph) and GLay
   - Meeting at 10am => work on the validation via GO enrichment (and pathways ?)
   - Analyzing the workflow of the validation test precisely (to be continued)
+
+- **Day 37** :
+  - First resulsts from SAM are promising
+  - Launching SAM on 117 genes of interest + biotic & 117 + all exp
+  - Read more about NV
