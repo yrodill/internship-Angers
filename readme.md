@@ -204,6 +204,11 @@
   - Analyzing the workflow of the validation test precisely (to be continued)
 
 - **Day 37** :
-  - First resulsts from SAM are promising
+  - First results from SAM are promising
   - Launching SAM on 117 genes of interest + biotic & 117 + all exp
   - Read more about NV
+
+- **Day 38** :
+  - MI/Pearson script corrected
+  - More results
+  - Starting to launch SAM on subclusters found with GLAY

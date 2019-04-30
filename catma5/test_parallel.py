@@ -12,14 +12,13 @@ parser = argparse.ArgumentParser(description='Process some integers.')
 
 parser.add_argument('data', metavar='f', type=str, help='data')
 parser.add_argument('model', metavar='m', type=str, help='correlation to be used')
-#parser.add_argument('njobs', metavar='j', type=int, help='nb jobs')
+parser.add_argument('--njobs', metavar='m', type=str, help='number of jobs for parralel computation',default=1)
 
 
 args = parser.parse_args()
 
 print('Reading file...')
 data = pd.read_csv(args.data, sep=',',header=None,skiprows=1)
-# print(data)
 print("Done...")
 
 def job_function(data,args,l):
@@ -29,35 +28,25 @@ def job_function(data,args,l):
     else:
         model = PearsonCorrelation()
 
-    for idx_i, i in enumerate(data.columns):
-            for idx_j, j in enumerate(data.columns[idx_i+1:]):
-                result.append([i,j,model.predict(data[i].values, data[j].values)])
+    for idx_j, j in enumerate(data.columns):
+        if(l == j):
+            result.append(0)
+        else:
+            if(args.model =="MI"):
+                result.append(model.predict(data[l].values, data[j].values)[0])
+            else:
+                result.append(model.predict(data[l].values, data[j].values))
     return result
   
 
 
 # Exec computations
+start_time = time.time()
 print("Launch parallelization...")
-results = Parallel(n_jobs=2)(delayed(job_function)(data,args,l) for l in range(len(data.columns)**2))
+results = Parallel(n_jobs=args.njobs)(delayed(job_function)(data,args,l) for l in range(len(data.columns)))
 print("Done..")
-# print(results)
-print(len(results))
+print("Execution time : {}".format(time.time() - start_time))
 
-# final=[]
-# for i in range(len(data.columns)**2):
-#     final.append(results[i][2])
 
 report = pd.DataFrame(results)
 report.to_csv("data/test_parallel3.csv",index=False,header=False)
-# # Compute scores:
-# scores = []
-# for pred in results:
-#   scores.append(score_function(pred, target))
-  
-# # Create report
-# order = list(parameters.keys())
-# report = pd.DataFrame(format_parameters(paramset, order), columns=order)
-# report['Score'] = scores
-# print(scores)
-# name_graph = args.data.split("/")[1]
-# report.to_csv(args.log + "/agsam3d-report_" + str(name_graph) + "_" + str(datetime.now().isoformat()) + ".csv", index=False)
