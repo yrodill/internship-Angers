@@ -212,3 +212,8 @@
   - MI/Pearson script corrected
   - More results
   - Starting to launch SAM on subclusters found with GLAY
+
+- **Day 39** :
+ - Pearson on ratio/biotic launched
+ - MI on Ratio all (star245)
+ - Script HRR-PCC.py to be continued...

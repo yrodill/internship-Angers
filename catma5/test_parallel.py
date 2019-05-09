@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='Process some integers.')
 
 parser.add_argument('data', metavar='f', type=str, help='data')
 parser.add_argument('model', metavar='m', type=str, help='correlation to be used')
-parser.add_argument('--njobs', metavar='m', type=str, help='number of jobs for parralel computation',default=1)
+parser.add_argument('--njobs', metavar='m', type=int, help='number of jobs for parralel computation',default=1)
 
 
 args = parser.parse_args()

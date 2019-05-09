@@ -2,7 +2,7 @@
 Benoît Bothorel
 Avril 2019
 Calculette pour multiplication en utilisant la méthode numérique de 
-la multiplication chinoise. (utilisation d'un Dataframe)
+la multiplication japonaise. (utilisation d'un Dataframe)
 
 Usage : python calculate.py [NUMBER1] [NUMBER2] [OPTION(S)]
 """
@@ -72,4 +72,10 @@ for i in range(0,len(calcs)):
 
 
 print("{} * {} = {} !".format(args.n1,args.n2,result))
+print("Vérification...")
+
+if(result == int(args.n1) * int(args.n2)):
+    print('True !')
+else:
+    print("False ! C'était {} !".format(int(args.n1)*int(args.n2)))
 
