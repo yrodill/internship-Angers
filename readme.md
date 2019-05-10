@@ -217,3 +217,8 @@
  - Pearson on ratio/biotic launched
  - MI on Ratio all (star245)
  - Script HRR-PCC.py to be continued...
+
+- **Day 40** :
+ - PCC-HRR launched for biotic/ratio
+ - The script can be enhanced
+ - MI still running on star245...
