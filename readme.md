@@ -222,3 +222,17 @@
  - PCC-HRR launched for biotic/ratio
  - The script can be enhanced
  - MI still running on star245...
+
+- **Day 41** :
+ - Memory problems with the PCC-HRR ; working around with chunks and abusing parallel
+ - MI failed ; too much time, I think there is a problem with the parallelization on the cluster
+ - Explications about all the internship started (pipeline + algos ...)
+
+- **Day 42** :
+ - Helped Sébastien with Cytoscape to add new links to his preexistent network
+ - PCC-HRR new version with double parallelization and no memory problems
+ - bit of writing on the previous doc
+
+- **Day 43** :
+ - Final version of PCC-HRR.py
+ - Writing

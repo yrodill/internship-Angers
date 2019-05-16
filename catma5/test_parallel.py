@@ -45,7 +45,7 @@ start_time = time.time()
 print("Launch parallelization...")
 results = Parallel(n_jobs=args.njobs)(delayed(job_function)(data,args,l) for l in range(len(data.columns)))
 print("Done..")
-print("Execution time : {}".format(time.time() - start_time))
+print("Execution time : {}s".format(time.time() - start_time))
 
 
 report = pd.DataFrame(results)
