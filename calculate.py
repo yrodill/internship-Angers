@@ -1,3 +1,7 @@
+import argparse
+import pandas as pd
+import numpy as np
+
 """
 Benoît Bothorel
 Avril 2019
@@ -6,10 +10,6 @@ la multiplication japonaise. (utilisation d'un Dataframe)
 
 Usage : python calculate.py [NUMBER1] [NUMBER2] [OPTION(S)]
 """
-
-import argparse
-import pandas as pd
-import numpy as np
 
 parser = argparse.ArgumentParser(description='Process some integers.',
                                 usage="python calculate.py [NUMBER1] [NUMBER2] [OPTION(S)]")

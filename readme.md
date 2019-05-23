@@ -236,3 +236,22 @@
 - **Day 43** :
  - Final version of PCC-HRR.py
  - Writing
+
+- **Day 44** :
+ - Meeting with Béatrice => one new cytoscape session sent to Sébastien
+ - Writing
+ - To do : launch HRR for GENIE3 results + look at the results for ISample (GENIE3,PCC,MI,HRR,SAM)
+
+- **Day 45** :
+ - trying to improve the MI/PCC script
+ - cytoscape session for PCC results started
+
+- **Day 46** :
+ - MI/HRR on star245
+ - cytoscape
+
+- **Day 47** :
+ - Started a python script to make both clustering and GO terms analysis
+
+- **Day 48** :
+ - Python script updated (using a bash script to launch both R and python scripts for the GO analyze)
