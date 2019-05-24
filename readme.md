@@ -255,3 +255,8 @@
 
 - **Day 48** :
  - Python script updated (using a bash script to launch both R and python scripts for the GO analyze)
+
+- **Day 49** :
+ - MI results for Ratio_filtered (all ratio genes/xp) => 43h15 on 72 cpus
+ - discovery of GOATOOLS => pythonic way to make the GO enrichment
+ - script to use GOATOOLS almost done ; few errors to debug
