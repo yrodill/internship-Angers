@@ -257,6 +257,21 @@
  - Python script updated (using a bash script to launch both R and python scripts for the GO analyze)
 
 - **Day 49** :
- - MI results for Ratio_filtered (all ratio genes/xp) => 43h15 on 72 cpus
+ - MI results for Ratio_filtered (all ratio genes/xp) => 43h30 on 72 cpus
  - discovery of GOATOOLS => pythonic way to make the GO enrichment
  - script to use GOATOOLS almost done ; few errors to debug
+
+- **Day 50** :
+ - MI results for ISample (all genes/xp) => 43h on 72cpus
+ - PC results for Isample (all genes/xp) => 34min on 72cpus
+ - script to make GO enrichment with GOATOOLS done
+
+- **Day 51** :
+ - searching new algorithms for Gaussian Mixtures
+ - DP_GP_cluster not usable (cant process that much genes/exp)
+ - KINC : https://github.com/SystemsGenetics/KINC => C++ maybe?
+ - from scikit-learn ?
+
+- **Day 52** :
+ - gaussian mixtures problems ...
+ - WGCNA ?
