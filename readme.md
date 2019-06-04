@@ -214,75 +214,76 @@
   - Starting to launch SAM on subclusters found with GLAY
 
 - **Day 39** :
- - Pearson on ratio/biotic launched
- - MI on Ratio all (star245)
- - Script HRR-PCC.py to be continued...
+  - Pearson on ratio/biotic launched
+  - MI on Ratio all (star245)
+  - Script HRR-PCC.py to be continued...
 
 - **Day 40** :
- - PCC-HRR launched for biotic/ratio
- - The script can be enhanced
- - MI still running on star245...
+  - PCC-HRR launched for biotic/ratio
+  - The script can be enhanced
+  - MI still running on star245...
 
 - **Day 41** :
- - Memory problems with the PCC-HRR ; working around with chunks and abusing parallel
- - MI failed ; too much time, I think there is a problem with the parallelization on the cluster
- - Explications about all the internship started (pipeline + algos ...)
+  - Memory problems with the PCC-HRR ; working around with chunks and abusing parallel
+  - MI failed ; too much time, I think there is a problem with the parallelization on the cluster
+  - Explications about all the internship started (pipeline + algos ...)
 
 - **Day 42** :
- - Helped Sébastien with Cytoscape to add new links to his preexistent network
- - PCC-HRR new version with double parallelization and no memory problems
- - bit of writing on the previous doc
+  - Helped Sébastien with Cytoscape to add new links to his preexistent network
+  - PCC-HRR new version with double parallelization and no memory problems
+  - bit of writing on the previous doc
 
 - **Day 43** :
- - Final version of PCC-HRR.py
- - Writing
+  - Final version of PCC-HRR.py
+  - Writing
 
 - **Day 44** :
- - Meeting with Béatrice => one new cytoscape session sent to Sébastien
- - Writing
- - To do : launch HRR for GENIE3 results + look at the results for ISample (GENIE3,PCC,MI,HRR,SAM)
+  - Meeting with Béatrice => one new cytoscape session sent to Sébastien
+  - Writing
+  - To do : launch HRR for GENIE3 results + look at the results for ISample (GENIE3,PCC,MI,HRR,SAM)
 
 - **Day 45** :
- - trying to improve the MI/PCC script
- - cytoscape session for PCC results started
+  - trying to improve the MI/PCC script
+  - cytoscape session for PCC results started
 
 - **Day 46** :
- - MI/HRR on star245
- - cytoscape
+  - MI/HRR on star245
+  - cytoscape
 
 - **Day 47** :
- - Started a python script to make both clustering and GO terms analysis
+  - Started a python script to make both clustering and GO terms analysis
 
 - **Day 48** :
- - Python script updated (using a bash script to launch both R and python scripts for the GO analyze)
+  - Python script updated (using a bash script to launch both R and python scripts for the GO analyze)
 
 - **Day 49** :
- - MI results for Ratio_filtered (all ratio genes/xp) => 43h30 on 72 cpus
- - discovery of GOATOOLS => pythonic way to make the GO enrichment
- - script to use GOATOOLS almost done ; few errors to debug
+  - MI results for Ratio_filtered (all ratio genes/xp) => 43h30 on 72 cpus
+  - discovery of GOATOOLS => pythonic way to make the GO enrichment
+  - script to use GOATOOLS almost done ; few errors to debug
 
 - **Day 50** :
- - MI results for ISample (all genes/xp) => 43h on 72cpus
- - PC results for Isample (all genes/xp) => 34min on 72cpus
- - script to make GO enrichment with GOATOOLS done
+  - MI results for ISample (all genes/xp) => 43h on 72cpus
+  - PC results for Isample (all genes/xp) => 34min on 72cpus
+  - script to make GO enrichment with GOATOOLS done
 
 - **Day 51** :
- - searching new algorithms for Gaussian Mixtures
- - DP_GP_cluster not usable (cant process that much genes/exp)
- - KINC : https://github.com/SystemsGenetics/KINC => C++ maybe?
- - from scikit-learn ?
+  - searching new algorithms for Gaussian Mixtures
+  - DP_GP_cluster not usable (cant process that much genes/exp)
+  - KINC : https://github.com/SystemsGenetics/KINC => C++ maybe?
+  - from scikit-learn ?
 
 - **Day 52** :
- - gaussian mixtures problems ...
- - WGCNA ?
+  - gaussian mixtures problems ...
+  - WGCNA ?
 
 - **Day 53** :
- - Mission : Make run_GBA work for all subclusters/network
- - check MI_HRR results from Stargate
- - Done : one script to find the cluster with the most identity with a list of genes of reference
+  - Mission : Make run_GBA work for all subclusters/network
+  - check MI_HRR results from Stargate
+  - Done : one script to find the cluster with the most identity with a list of genes of reference
 
 - **Day 54** :
- - HRR improved for MI results => completing the other half of the matrix (caused a bug giving empty results)
- - EGAD_preprocessing.py => file formatting to run EGAD with R
- - TO DO : options for the script (filter GO terms by "Biological Process"? / allow to choose between directed/undirected links)
- - Make the R script for EGAD and one bash script to englobe both python and R process
+  - HRR improved for MI results => completing the other half of the matrix (caused a bug giving empty results)
+  - EGAD_preprocessing.py => file formatting to run EGAD with R
+  - TO DO : options for the script (filter GO terms by "Biological Process"? / allow to choose between directed/undirected links)
+  - Make the R script for EGAD and one bash script to englobe both python and R process
+  
