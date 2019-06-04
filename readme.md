@@ -275,3 +275,14 @@
 - **Day 52** :
  - gaussian mixtures problems ...
  - WGCNA ?
+
+- **Day 53** :
+ - Mission : Make run_GBA work for all subclusters/network
+ - check MI_HRR results from Stargate
+ - Done : one script to find the cluster with the most identity with a list of genes of reference
+
+- **Day 54** :
+ - HRR improved for MI results => completing the other half of the matrix (caused a bug giving empty results)
+ - EGAD_preprocessing.py => file formatting to run EGAD with R
+ - TO DO : options for the script (filter GO terms by "Biological Process"? / allow to choose between directed/undirected links)
+ - Make the R script for EGAD and one bash script to englobe both python and R process

@@ -229,75 +229,27 @@ predictions <- function(genes.labels, network) {
   
   # Get sums - mat. mul.
   sumin <- (t(network) %*% genes.labels)
-  write.csv(as.matrix(sumin),"sumin.csv")
   
   # Sum of all edge in network
   sumall <- matrix(apply(network, 2, sum), ncol = dim(sumin)[2], nrow = dim(sumin)[1])
-  write.csv(as.matrix(sumall),"sumall.csv",col.names = rownames(genes.labels),row.names = rownames(network))
   
   # Predictions
   predicts <- sumin/sumall
-  write.csv(as.matrix(predicts),"predicts.csv")
   return(predicts)
 } 
 
+args<-commandArgs()
 
+df <- as.matrix(read.csv(file=args[1]))
+#g <- simplify(graph_from_data_frame(df,directed=F))
 
-df <- as.matrix(read.csv(file="/home/bothorel/internship-Angers/catma5/biological_results/Ratio/biotic/list_link_biotic_5000_0.05.csv"))
-g <- simplify(graph_from_data_frame(df,directed=F))
-vertex.number<-length(V(g)$name)
-edge.number<-length(E(g))
-mean.degree<-mean(degree(g))
-
-#agrigo<-read.table("/home/bothorel/internship-Angers/catma5/data/GOagri_term_Arabidopsis_thaliana", sep="", header=F)
-#agrigo<-read.csv("/home/bothorel/internship-Angers/GOSlim/ATH_GO_normalized.csv", sep="\t",header=F)
-agrigo<-read.csv("/home/bothorel/internship-Angers/GOSlim/ATH_GO_Full_normalized.csv", sep=",",header=F)
+agrigo<-read.csv(args[2], sep="\t",header=F)
 
 
 agrigo<-subset(agrigo, agrigo[,2] %in% V(g)$name)
 GO.eff<-table(agrigo[,3])
 GO.eff<-names(which(GO.eff>2 & GO.eff<501))
 agrigo<-droplevels(subset(agrigo, agrigo[,3] %in% GO.eff))
-
-
-goterms<-names(table(agrigo[,3]))
-go.list<-vector(mode="list", length(goterms))
-names(go.list)<-goterms
-for (i in goterms){
-  tmp<-subset(agrigo, agrigo[,3]==i)
-  go.list[[i]]<-t(combn(as.vector(tmp[,2]),2))
-}
-
-go.table<-do.call("rbind", go.list)
-go.tag<-unlist(lapply(go.list, nrow))
-genome.effectif<-go.tag
-go.tag<-unlist(sapply(1:length(go.tag), function(x)rep(names(go.tag)[x],go.tag[x])))
-go.table<-cbind.data.frame(go.table,go.tag)
-go.table<-rbind(cbind(paste(go.table[,1], go.table[,2], sep="_"), as.vector(go.table[,3])), cbind(paste(go.table[,2], go.table[,1], sep="_"),  as.vector(go.table[,3])))
-
-
-#GO enrichment
-universe=choose(length(table(agrigo[,2])),2)
-g.edgelist<-as_edgelist(g)
-g.edgelist<-paste(g.edgelist[,1], g.edgelist[,2], sep="_")
-go.table.local<-subset(go.table, go.table[,1] %in% g.edgelist)
-print(table(go.table[,2]))
-print(names(table(go.table.local[,2])))
-print(table(go.table[,2])[names(table(go.table.local[,2]))]/2)
-table.hyper<-cbind(table(go.table.local[,2]), table(go.table[,2])[names(table(go.table.local[,2]))]/2)
-k<-length(E(g))
-pval<-apply(table.hyper, 1, function(x){
-  q<-as.numeric(x[1])
-  m<-as.numeric(x[2])
-  n<- universe - m
-  phyper(q, m, n, k, lower.tail=F)
-})
-pval.list <- data.frame(pval)
-pval.list.ordered <- pval.list[order(pval.list$pval),,drop=FALSE]
-pvaladjust<-p.adjust(as.numeric(unlist(pval.list.ordered)), method="BH")
-go.list.table<-cbind(table.hyper, pvaladjust)
-go.list.table<-go.list.table[go.list.table[,3]<0.05,,drop=F]
-number.enriched.go.global<-nrow(go.list.table)
 
 
 #AUROC
@@ -316,10 +268,10 @@ auroc_network<-GO_groups_voted[[3]]
 auroc_degree<-mean(GO_groups_voted[[1]][,3])
 print(GO_groups_voted[[1]][,3])
 
-par(mfrow=c(2,1))
-plot(g, edge.arrow.size=.2,vertex.size=2,vertex.label=NA,edge.width=0.2)
-plot(g.go, edge.arrow.size=.2,vertex.size=2,vertex.label=NA,edge.width=0.2)
+# par(mfrow=c(2,1))
+# plot(g, edge.arrow.size=.2,vertex.size=2,vertex.label=NA,edge.width=0.2)
+# plot(g.go, edge.arrow.size=.2,vertex.size=2,vertex.label=NA,edge.width=0.2)
 
 df <-as.matrix(GO_groups_voted[[2]])
-getwd()
+# getwd()
 write.csv(df,"testeeeeeeeee.csv")
