@@ -1,21 +1,16 @@
-library(igraph)
-#library(EGAD)
-library(data.table)
-library(parallel)
-library(reshape2)
 library(Matrix)
 
 run_GBA <- function(network, labels, min = 20, max = 1000, nfold = 3) {
-  
+
   m <- match(rownames(network), rownames(labels))
   f <- !is.na(m)
   g <- m[f]
-  
+
   network.sub <- network[f, f]
   genes.labels <- filter_network_cols(labels[g, ], min, max)
-  
-  roc.sub <- neighbor_voting(genes.labels, network.sub, nfold)
-  genes <- predictions(genes.labels, network.sub)
+
+  roc.sub <- neighbor_voting(labels, network, nfold)
+  genes <- predictions(labels, network)
   auroc <- mean(roc.sub[, 1], na.rm = TRUE)
   
   results <- list(roc.sub, genes, auroc)
@@ -39,7 +34,6 @@ filter_network_cols <- function(network, min = 0, max = 1, ids = NA) {
 } 
 
 neighbor_voting <- function(genes.labels, network, nFold = 3, output = "AUROC", FLAG_DRAW = FALSE) {
-  
   genes.labels <- as.matrix(genes.labels)
   
   # Filter for common genes between network and labels
@@ -54,16 +48,21 @@ neighbor_voting <- function(genes.labels, network, nFold = 3, output = "AUROC", 
   filt.net <- match.lab[filt.lab]
   network <- network[filt.net, filt.net]
   genes.labels <- as.matrix(genes.labels[filt.lab, ])
-  
+
   # genes.label : needs to be in 1s and 0s
   l <- dim(genes.labels)[2]
+  print(l)
   g <- dim(genes.labels)[1]
+  print(g)
   ab <- which(genes.labels != 0, arr.ind = TRUE)
+  print(ab)
   n <- length(ab[, 1])
+  print(n)
   
   
   # print('Make genes label CV matrix')
   test.genes.labels <- matrix(genes.labels, nrow = g, ncol = nFold * l)
+  print(test.genes.labels)
   
   # For each fold in each GO group, remove 1/nth of the values of the genes.label
   for (j in 1:l) {
@@ -239,39 +238,36 @@ predictions <- function(genes.labels, network) {
 } 
 
 args<-commandArgs()
+getwd()
+setwd(dir ="/home/bothorel/internship-Angers/catma5/")
 
-df <- as.matrix(read.csv(file=args[1]))
-#g <- simplify(graph_from_data_frame(df,directed=F))
+#genes.labels <- matrix( sample( c(0,1), 1000, replace=TRUE), nrow=100)
+#rownames(genes.labels) = paste('gene', 1:100, sep='')
+#colnames(genes.labels) = paste('function', 1:10, sep='')
+#net <- cor( matrix( rnorm(10000), ncol=100), method='spearman')
+#rownames(net) <- paste('gene', 1:100, sep='')
+#colnames(net) <- paste('gene', 1:100, sep='')
+#gba <- run_GBA(net, genes.labels, min=10) 
 
-agrigo<-read.csv(args[2], sep="\t",header=F)
+adj.matrix <- as.matrix(read.csv("data/tmp_adj_matrix.csv",row.names = 1))
+#adj.matrix <- as(adj.matrix,"sparseMatrix")
 
+agrigo <- as.matrix(read.csv("data/tmp_GO_matrix.csv",row.names = 1))
+#agrigo <- as(agrigo,"sparseMatrix")
 
-agrigo<-subset(agrigo, agrigo[,2] %in% V(g)$name)
-GO.eff<-table(agrigo[,3])
-GO.eff<-names(which(GO.eff>2 & GO.eff<501))
-agrigo<-droplevels(subset(agrigo, agrigo[,3] %in% GO.eff))
-
-
-#AUROC
-g.go<-simplify(graph_from_data_frame(agrigo[,2:3], directed=F))
-go.table.auroc<-as_adjacency_matrix(g.go)
-go.table.auroc<-as.matrix(go.table.auroc[grep("GO:", colnames(go.table.auroc), invert=T),grep("GO:", colnames(go.table.auroc))])
-cs.go<-colSums(go.table.auroc)
-go.table.auroc<-go.table.auroc[,cs.go>2 & cs.go<301]
-go.table.auroc<-as(go.table.auroc, "sparseMatrix")
-
-
-mat.adj<-as_adjacency_matrix(g)
-mat.adj<-mat.adj[rownames(go.table.auroc), rownames(go.table.auroc)]
-GO_groups_voted <-run_GBA(mat.adj, go.table.auroc, min=20, max=1000)
+GO_groups_voted <-run_GBA(adj.matrix,agrigo, min=20, max=1000, nfold=3)
 auroc_network<-GO_groups_voted[[3]]
 auroc_degree<-mean(GO_groups_voted[[1]][,3])
-print(GO_groups_voted[[1]][,3])
+GO <- list(GO_groups_voted[[1]][,3])
 
-# par(mfrow=c(2,1))
-# plot(g, edge.arrow.size=.2,vertex.size=2,vertex.label=NA,edge.width=0.2)
-# plot(g.go, edge.arrow.size=.2,vertex.size=2,vertex.label=NA,edge.width=0.2)
-
-df <-as.matrix(GO_groups_voted[[2]])
-# getwd()
-write.csv(df,"testeeeeeeeee.csv")
+GO_terms <- c()
+values <- c()
+for(i in 1:length(GO_groups_voted[[1]][,3])){
+  if(GO_groups_voted[[1]][i,3] > 0.7){
+    GO_terms <- c(GO_terms,names(GO[[1]][i]))
+    values <- c(values,GO_groups_voted[[1]][i,3])
+  }
+}
+library(data.table)
+data <- data.table(GO=GO_terms,value=values)
+write.csv(data,'test.csv')

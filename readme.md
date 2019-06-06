@@ -284,6 +284,14 @@
 - **Day 54** :
   - HRR improved for MI results => completing the other half of the matrix (caused a bug giving empty results)
   - EGAD_preprocessing.py => file formatting to run EGAD with R
-  - TO DO : options for the script (filter GO terms by "Biological Process"? / allow to choose between directed/undirected links)
+  - TO DO : options for the script (filter GO terms by "Biological Process"? / allow to choose between directed/undirected links?)
   - Make the R script for EGAD and one bash script to englobe both python and R process
+
+- **Day 55** :
+  - huge problems with the run_GBA() function
+
+- **Day 56** :
+  - run_GBA() fixed , R script done
+  - improvement of the EGAD_preprocessing.py script : filters for GO !
+  - to do : filter rare terms and over-representated terms
   
