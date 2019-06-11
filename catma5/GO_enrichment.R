@@ -51,19 +51,14 @@ neighbor_voting <- function(genes.labels, network, nFold = 3, output = "AUROC", 
 
   # genes.label : needs to be in 1s and 0s
   l <- dim(genes.labels)[2]
-  print(l)
   g <- dim(genes.labels)[1]
-  print(g)
   ab <- which(genes.labels != 0, arr.ind = TRUE)
-  print(ab)
   n <- length(ab[, 1])
-  print(n)
-  
+
   
   # print('Make genes label CV matrix')
   test.genes.labels <- matrix(genes.labels, nrow = g, ncol = nFold * l)
-  print(test.genes.labels)
-  
+
   # For each fold in each GO group, remove 1/nth of the values of the genes.label
   for (j in 1:l) {
     d <- which(ab[, 2] == j)  # Which indices the genes are in this particular GO group
@@ -238,22 +233,12 @@ predictions <- function(genes.labels, network) {
 } 
 
 args<-commandArgs()
-getwd()
 setwd(dir ="/home/bothorel/internship-Angers/catma5/")
 
-#genes.labels <- matrix( sample( c(0,1), 1000, replace=TRUE), nrow=100)
-#rownames(genes.labels) = paste('gene', 1:100, sep='')
-#colnames(genes.labels) = paste('function', 1:10, sep='')
-#net <- cor( matrix( rnorm(10000), ncol=100), method='spearman')
-#rownames(net) <- paste('gene', 1:100, sep='')
-#colnames(net) <- paste('gene', 1:100, sep='')
-#gba <- run_GBA(net, genes.labels, min=10) 
 
 adj.matrix <- as.matrix(read.csv("data/tmp_adj_matrix.csv",row.names = 1))
-#adj.matrix <- as(adj.matrix,"sparseMatrix")
 
 agrigo <- as.matrix(read.csv("data/tmp_GO_matrix.csv",row.names = 1))
-#agrigo <- as(agrigo,"sparseMatrix")
 
 GO_groups_voted <-run_GBA(adj.matrix,agrigo, min=20, max=1000, nfold=3)
 auroc_network<-GO_groups_voted[[3]]
@@ -263,7 +248,7 @@ GO <- list(GO_groups_voted[[1]][,3])
 GO_terms <- c()
 values <- c()
 for(i in 1:length(GO_groups_voted[[1]][,3])){
-  if(GO_groups_voted[[1]][i,3] > 0.7){
+  if(GO_groups_voted[[1]][i,3] > 0.6){
     GO_terms <- c(GO_terms,names(GO[[1]][i]))
     values <- c(values,GO_groups_voted[[1]][i,3])
   }

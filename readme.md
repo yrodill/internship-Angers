@@ -294,4 +294,12 @@
   - run_GBA() fixed , R script done
   - improvement of the EGAD_preprocessing.py script : filters for GO !
   - to do : filter rare terms and over-representated terms
-  
+
+- **Day 57** :
+  - all filters added
+  - bash script ready
+  - to complete : get all genes links from each cluster
+
+- **Day 58** :
+  - EGAD and GOATOOLS regrouped in one script + adding exception holder for empty clustering
+  - to do : comparison between both results
