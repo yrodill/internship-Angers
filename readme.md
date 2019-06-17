@@ -301,5 +301,28 @@
   - to complete : get all genes links from each cluster
 
 - **Day 58** :
+  - all genes links from each cluster : done
   - EGAD and GOATOOLS regrouped in one script + adding exception holder for empty clustering
   - to do : comparison between both results
+
+- **Day 59** :
+  - New plan of action :)
+  - GO_comparison store AUC for each term + calc mean for each file => to do
+  - fixed destination of xlsx files in launch_GO_analyze.sh
+
+- **Day 60** :
+  - filter_links.py (new version) => threshold modified + choice for rank(HRR)/value
+  - results for 117genes+subtilases (genie3/pc/mi + SAM running)
+  - to do : check potential problem with HRR
+
+- **Day 61** :
+  - problem fixed for filter_links.py
+  - cytoscape results for all methods net83_SAM117.cys
+  - goatools/egad not givin the same results, even with same parameters (??)
+  - score to calculate per cluster and global
+
+- **Day 62** :
+  - Few adjustements with the launch_GO_analyze.sh script
+  - added the choice between edge_betweenness/fast greedy clustering
+  - modifying min and max in launch_GO_analyze.sh can break the results if the threshold is too stringent
+  
