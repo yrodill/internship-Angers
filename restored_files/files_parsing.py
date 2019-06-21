@@ -12,9 +12,25 @@ Bothorel Benoît
 May 2019
 Formating files for the enrichment analysis
 with GOATOOLS https://github.com/tanghaibao/goatools/
-Before using this script, create two folders called "study" & "cluster_links"
-in which clusters will be stored for further analysis
-"""            
+""" 
+
+def format_GO_file(df,genes,index):
+    for i in range(len(df.index)):
+        if(df.at[i,0] not in genes):
+            genes[df.at[i,0]] = [df.at[i,index]]
+        else:
+            genes[df.at[i,0]].append(df.at[i,index])
+
+    with open('tmp_{}'.format(args.GO.split('/')[-1]),'w') as f:
+        for k,v in genes.items():
+            string = str(k)+"\t"
+            for i in range(len(v)):
+                if(i != len(v)-1):
+                    string+=str(v[i])+';'
+                else:
+                    string+=str(v[i])+'\n'
+            f.write(string)
+
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 
@@ -22,6 +38,7 @@ parser.add_argument('original', metavar='d', type=str, help='file containing the
 parser.add_argument('data', metavar='d', type=str, help='file containing the genes with their cluster attribute (obtained through clustering.R)')
 parser.add_argument('GO', metavar='g', type=str, help='file from TAIR database for the GO association')
 parser.add_argument('--threshold', metavar='t', type=int, help='threshold for the cluster`s size',default=100)
+parser.add_argument('--specific', action='store_true', help='If you are using a specific GO file (one given by parse_GO.py)',default=False)
 
 args = parser.parse_args()
 
@@ -33,21 +50,10 @@ Parsing the GO file
 df = pd.read_csv(args.GO,sep='\t',header=None)
 genes = {}
 
-for i in range(len(df.index)):
-    if(df.at[i,0] not in genes):
-        genes[df.at[i,0]] = [df.at[i,5]]
-    else:
-        genes[df.at[i,0]].append(df.at[i,5])
-
-with open('tmp_{}'.format(args.GO.split('/')[-1]),'w') as f:
-    for k,v in genes.items():
-        string = str(k)+"\t"
-        for i in range(len(v)):
-            if(i != len(v)-1):
-                string+=str(v[i])+';'
-            else:
-                string+=str(v[i])+'\n'
-        f.write(string)
+if(args.specific):
+    format_GO_file(df,genes,1)
+else:
+    format_GO_file(df,genes,5)
 
 """
 Part 2 :
@@ -113,9 +119,9 @@ for i in tqdm(range(len(filtered_clusters))):
         f.write('gene1,gene2\n')
         for gene in filtered_clusters[i]:
             for j in range(len(df.index)):
-                if([gene,df.at[j,'gene2']] in couples):
+                if([gene,df.iat[j,1]] in couples):
                     continue
-                elif(df.at[j,'gene1'] == gene and df.at[j,'gene2'] in filtered_clusters[i]):
-                    couples.append([gene,df.at[j,'gene2']])
-                    f.write(str(gene)+","+str(df.at[j,'gene2']+'\n'))
+                elif(df.iat[j,0] == gene and df.iat[j,1] in filtered_clusters[i]):
+                    couples.append([gene,df.iat[j,1]])
+                    f.write(str(gene)+","+str(df.iat[j,1]+'\n'))
                 

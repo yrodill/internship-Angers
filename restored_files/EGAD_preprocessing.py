@@ -56,10 +56,14 @@ def get_adjacency_matrix(df,df2):
     return df2
 
 def test_process(args,df,i):
-	if(df.at[i,7] == args.process or args.process == 'all'):
-		return True
-	else:
-		return False
+    if(args.specific):
+        index = 3
+    else:
+        index = 7
+    if(df.iat[i,index] == args.process or args.process == 'all'):
+        return True
+    else:
+        return False
 
 def get_allowed_evidence_codes(args):
 	if(args.ev_inc != 'all'):
@@ -89,10 +93,14 @@ def get_allowed_evidence_codes(args):
 				"HTP","HDA","HMP","HGI","HEP","TAS","NAS","IC","ND","IEA"]
 
 def test_evidence_codes(ev_inc,df,i):
-	if(df.at[i,9] not in ev_inc):
-		return False
-	else:
-		return True
+    if(args.specific):
+        index = 4
+    else:
+        index = 9
+    if(df.iat[i,index] not in ev_inc):
+        return False
+    else:
+        return True
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
@@ -102,8 +110,10 @@ parser.add_argument('--process', metavar='p', default='all', help='filter by typ
 parser.add_argument('--ev_inc', metavar='e',nargs='*',type=str, default='all', help='evidence codes to use can be by group name/group names/evidence codes')
 parser.add_argument('--min', metavar='m',type=int, default=3, help='min value to filter under-represented GO Terms')
 parser.add_argument('--max', metavar='x',type=int, default=200, help='max value to filter over-represented GO Terms')
+parser.add_argument('--specific', action='store_true', help='If you are using a specific GO file (one given by parse_GO.py)',default=False)
 
 args = parser.parse_args()
+
 
 if(args.process == "BP"):
 	args.process = "P"
@@ -145,14 +155,18 @@ Functionnal annotations
 Links between Genes and GO Terms
 """
 df = pd.read_csv(args.GO,sep='\t',header=None)
+if(args.specific):
+    index=1
+else:
+    index=5     
 
 association = {}
 for i in tqdm(range(len(df.index))):
-    if(df.at[i,0] in genes and test_process(args,df,i) and test_evidence_codes(allowed_evidence_codes,df,i)):
+    if(df.iat[i,0] in genes and test_process(args,df,i) and test_evidence_codes(allowed_evidence_codes,df,i)):
         if(df.at[i,0] not in association.keys()):
-            association[df.at[i,0]]=[df.at[i,5]]
+            association[df.iat[i,0]]=[df.iat[i,index]]
         else:
-            association[df.at[i,0]].append(df.at[i,5])
+            association[df.iat[i,0]].append(df.iat[i,index])
 
 GOTerms = []
 for k,v in association.items():

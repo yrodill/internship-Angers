@@ -4,12 +4,15 @@ import pandas as pd
 import argparse
 
 """
+Bothorel Benoît
+19/06/2019
 Récupération des liens entre AT4G44585 et les subtilases
 """
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 
 parser.add_argument('data', metavar='f', type=str, help='list of links')
+parser.add_argument('--symetric', action='store_true',default=False, help='if method applied gave a symetric matrix')
 
 args = parser.parse_args()
 
@@ -21,5 +24,8 @@ with open(args.data.split('/')[-1].split('.')[0]+'_SCOOP.csv','w') as f:
     for i in range(len(df.index)):
         if(df.iat[i,0] == 'AT5G44585' and df.iat[i,1] in subtilases and df.iat[i,2] != 0):
             f.write(str(df.iat[i,0])+','+str(df.iat[i,1])+','+str(df.iat[i,2])+'\n')
-        if(df.iat[i,1] == 'AT5G44585' and df.iat[i,0] in subtilases and df.iat[i,2] != 0):
-            f.write(str(df.iat[i,0])+','+str(df.iat[i,1])+','+str(df.iat[i,2])+'\n')
+        if(args.symetric):
+            continue
+        else:
+            if(df.iat[i,1] == 'AT5G44585' and df.iat[i,0] in subtilases and df.iat[i,2] != 0):
+                f.write(str(df.iat[i,0])+','+str(df.iat[i,1])+','+str(df.iat[i,2])+'\n')

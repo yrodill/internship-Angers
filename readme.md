@@ -326,3 +326,15 @@
   - added the choice between edge_betweenness/fast greedy clustering
   - modifying min and max in launch_GO_analyze.sh can break the results if the threshold is too stringent
   
+- **Day 63** :
+  - Meeting with Sébastien : 
+    - GO to modify : column I(8) instead of F(5)
+    - Make a script that gives AT5G44585 links with subtilases by scores
+    - find the cytoscape session with all clusters and genes of interests in red
+
+- **Day 64** :
+  - All files seem to be here and some have been fixed
+  - New script to parse the GO file (to do : select a few terms from the go slim for specific study)
+  - script to get links between SCOOP12 and the subtilases
+  - all experiences re-run for MI/PC/GENIE3
+  
