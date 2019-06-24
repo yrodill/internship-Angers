@@ -31,8 +31,12 @@ def keep_best_links(df,l):
     result=[]
     with open('tmp_{}.csv'.format(args.data.split('.')[0]),'a') as f:
         for j in range(len(df.index)):
-            result.append([df.columns.values[l],df.columns.values[j],df.iat[l,j]])
+            # print(df.columns.values[l])
+            # print(df.iat[l,j])
+            # print(abs(df.iat[l,j]))
+            result.append([df.columns.values[l],df.columns.values[j],abs(df.iat[l,j])])
         result=sorted(result,key=byValue,reverse=True)
+        # print(result)
         index=0
         for val in result:
             if(index < args.threshold):
@@ -41,19 +45,19 @@ def keep_best_links(df,l):
             else:
                 return
 
-def select_ranks(df,i,liste):
-    gene1 = df.at[i,'gene1']
-    gene2 = df.at[i,'gene2']
+def select_ranks(df1,df2,i,liste):
+    gene1 = df2.at[i,'gene1']
+    gene2 = df2.at[i,'gene2']
     liste.append([gene1,gene2])
-    if([gene2,gene1] in liste[0]):
+    if(([gene2,gene1] in liste[0]) or ([gene1,gene2] in liste[0])):
         return
-    for j in range(i+1,len(df.index)):
-        if(gene1 == df.at[j,'gene2'] and gene2 == df.at[j,'gene1']):
-            maxi=max(df.at[i,'rank'],df.at[j,'rank'])
-            df.at[i,'rank']=maxi
-            df.at[j,'rank']=maxi
-            if(df.at[i,'value']!= 0):
-                return [df.at[i,'gene1'],df.at[i,'gene2'],df.at[i,'value'],df.at[i,'rank']]
+    for j in range(i+1,len(df2.index)):
+        if(gene1 == df2.at[j,'gene2'] and gene2 == df2.at[j,'gene1']):
+            maxi=max(df2.at[i,'rank'],df2.at[j,'rank'])
+            df2.at[i,'rank']=maxi
+            df2.at[j,'rank']=maxi
+            if(df2.at[i,'value']!= 0):
+                return [df2.at[i,'gene1'],df2.at[i,'gene2'],df1.at[df2.at[i,'gene1'],df2.at[i,'gene2']],df2.at[i,'rank']]
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
@@ -79,20 +83,24 @@ if(args.zeros):
                 df.iat[j,i] = df.iat[i,j]
     print('Done...')
 
+print(df)
+
 print("Step 1/2...")
 Parallel(n_jobs=args.njobs)(delayed(keep_best_links)(df,l) for l in tqdm(range((len(df.columns)))))
 print("Done...")
-del(df) #free memory
+# del(df) #free memory
+
 
 df2 = pd.read_csv('tmp_{}.csv'.format(args.data.split('.')[0]),header=None)
 df2.columns=["gene1","gene2","value",'rank']
 
 print("Step 2/2...")
 genes=[]
-liste = Parallel(n_jobs=args.njobs,max_nbytes=args.bytes)(delayed(select_ranks)(df2,i,genes) for i in tqdm(range(len(df2.index))))
+liste = Parallel(n_jobs=args.njobs,max_nbytes=args.bytes)(delayed(select_ranks)(df,df2,i,genes) for i in tqdm(range(len(df2.index))))
 liste = [x for x in liste if x is not None]
-df3 = pd.DataFrame(liste,columns=["gene1","gene2","value","rank"])         
-df3=df3.sort_values(by='value',ascending=False)
+
+df3 = pd.DataFrame(liste,columns=["gene1","gene2","value","rank"])
+df3=df3.sort_values(by='rank',ascending=True)
 df3.to_csv('link_HRR_{}.csv'.format(args.data.split('.')[0]),index=False)
 print("Done...")
 
