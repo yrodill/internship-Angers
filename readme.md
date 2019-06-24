@@ -337,4 +337,11 @@
   - New script to parse the GO file (to do : select a few terms from the go slim for specific study)
   - script to get links between SCOOP12 and the subtilases
   - all experiences re-run for MI/PC/GENIE3
+
+- **Day 65** :
+  - Corrected Pearson (abs values)
+  - Corrected filter_links.py (removing duplicates => options updated)
+  - meeting with Tanguy and Sébastien at the IRHS => confirmed using hypergeometric test + GO Slim BP EXP
+  - GO fixed, working well with EGAD + GOATOOLS : TO DO => launch on a lot of results
+  - problem with the parallelization  => write in file bugged for some lines
   

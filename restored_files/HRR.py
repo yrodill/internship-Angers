@@ -49,7 +49,7 @@ def select_ranks(df1,df2,i,liste):
     gene1 = df2.at[i,'gene1']
     gene2 = df2.at[i,'gene2']
     liste.append([gene1,gene2])
-    if(([gene2,gene1] in liste[0]) or ([gene1,gene2] in liste[0])):
+    if([gene2,gene1] in liste[0]):
         return
     for j in range(i+1,len(df2.index)):
         if(gene1 == df2.at[j,'gene2'] and gene2 == df2.at[j,'gene1']):
