@@ -5,7 +5,7 @@
 #' @param Links_matrix Binary matrix of genes*genes.
 #' @param GO_matrix Binary matrix of genes*GOTerms.
 #' @param output Filename of the output.
-#' @param threshold Threshold for the AUC limit(between 0 and 1 , default at 0.6).
+#' @param calc Which score to calculate (AUROC/PR)
 #' @return Write a csv file containing the GOTerms with an AUC >threshold.
 #' @examples
 #' Rscript --vanilla GO_enrichment.R genes_links.csv GO_matrix.csv results.csv 0.7
@@ -15,7 +15,7 @@ args<-commandArgs(trailingOnly=TRUE)
 library(Matrix)
 library(data.table)
 
-run_GBA <- function(network, labels, min = 20, max = 1000, nfold = 3) {
+run_GBA <- function(network, labels, min = 20, max = 1000, nfold = 3, calc = "AUROC") {
 
   m <- match(rownames(network), rownames(labels))
   f <- !is.na(m)
@@ -24,7 +24,7 @@ run_GBA <- function(network, labels, min = 20, max = 1000, nfold = 3) {
   network.sub <- network[f, f]
   genes.labels <- filter_network_cols(labels[g, ], min, max)
 
-  roc.sub <- neighbor_voting(labels, network, nfold)
+  roc.sub <- neighbor_voting(labels, network, nfold, output=calc)
   genes <- predictions(labels, network)
   auroc <- mean(roc.sub[, 1], na.rm = TRUE)
   
@@ -252,7 +252,8 @@ adj.matrix <- as.matrix(read.csv(args[1],row.names = 1))
 
 agrigo <- as.matrix(read.csv(args[2],row.names = 1))
 
-GO_groups_voted <-run_GBA(adj.matrix,agrigo, min=20, max=1000, nfold=300)
+#AUROC CALC
+GO_groups_voted <-run_GBA(adj.matrix,agrigo, min=20, max=1000, nfold=3,calc="AUROC")
 auroc_network<-GO_groups_voted[[3]]
 auroc_degree<-mean(GO_groups_voted[[1]][,3])
 GO <- list(GO_groups_voted[[1]][,3])
@@ -267,3 +268,20 @@ for(i in 1:length(GO_groups_voted[[1]][,3])){
 }
 data <- data.table(GO=GO_terms,value=values)
 write.csv(data,args[3],row.names=FALSE)
+
+#PR CALC
+GO_groups_voted <-run_GBA(adj.matrix,agrigo, min=20, max=1000, nfold=3, calc="PR")
+auroc_network<-GO_groups_voted[[3]]
+auroc_degree<-mean(GO_groups_voted[[1]][,3])
+GO <- list(GO_groups_voted[[1]][,3])
+
+GO_terms <- c()
+values <- c()
+for(i in 1:length(GO_groups_voted[[1]][,3])){
+  #if(GO_groups_voted[[1]][i,3] > 0.6){
+    GO_terms <- c(GO_terms,names(GO[[1]][i]))
+    values <- c(values,GO_groups_voted[[1]][i,3])
+  #}
+}
+data <- data.table(GO=GO_terms,value=values)
+write.csv(data,args[4],row.names=FALSE)

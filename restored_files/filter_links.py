@@ -31,7 +31,7 @@ def keep_best_links(df,l):
     result=[]
     with open('tmp_{}.csv'.format(args.data.split('.')[0]),'a') as f:
         for j in range(len(df.index)):
-            result.append([df.columns.values[l],df.columns.values[j],df.iat[l,j]])
+            result.append([df.columns.values[l],df.columns.values[j],abs(df.iat[l,j])])
         result=sorted(result,key=byValue,reverse=True)
         index=0
         for val in result:
@@ -41,31 +41,34 @@ def keep_best_links(df,l):
             else:
                 return
 
-def select_ranks(df,i,liste):
-    gene1 = df.at[i,'gene1']
-    gene2 = df.at[i,'gene2']
+def select_ranks(df1,df2,i,liste):
+    gene1 = df2.at[i,'gene1']
+    gene2 = df2.at[i,'gene2']
     liste.append([gene1,gene2])
     if([gene2,gene1] in liste[0]):
         return
-    for j in range(i+1,len(df.index)):
-        if(gene1 == df.at[j,'gene2'] and gene2 == df.at[j,'gene1']):
-            maxi=max(df.at[i,'rank'],df.at[j,'rank'])
-            df.at[i,'rank']=maxi
-            df.at[j,'rank']=maxi
-            if(df.at[i,'value']!= 0):
-                return [df.at[i,'gene1'],df.at[i,'gene2'],df.at[i,'value'],df.at[i,'rank']]
+    for j in range(i+1,len(df2.index)):
+        if(gene1 == df2.at[j,'gene2'] and gene2 == df2.at[j,'gene1']):
+            maxi=max(df2.at[i,'rank'],df2.at[j,'rank'])
+            df2.at[i,'rank']=maxi
+            df2.at[j,'rank']=maxi
+            if(df2.at[i,'value']!= 0):
+                return [gene1,gene2,df1.at[gene1,gene2],df2.at[i,'rank']]
 
-def keep_best_values(df,l):
+def keep_best_values(df,l,liste):
     result=[]
     with open('tmp_{}.csv'.format(args.data.split('.')[0]),'a') as f:
         for j in range(len(df.index)):
-            result.append([df.columns.values[l],df.columns.values[j],df.iat[l,j]])
+            if(df.iat[l,j] < 0):
+                result.append([df.columns.values[l],df.columns.values[j],abs(df.iat[l,j]),"-"])
+            else:
+                result.append([df.columns.values[l],df.columns.values[j],abs(df.iat[l,j]),"+"])
         result=sorted(result,key=byValue,reverse=True)
         index=0
         for val in result:
             if(index < args.threshold):
                 index+=1
-                f.write(str(val[0])+','+str(val[1])+','+str(val[2])+'\n')
+                f.write(str(val[0])+','+str(val[1])+','+str(val[2])+','+str(val[3])+'\n')
             else:
                 return
 
@@ -73,12 +76,12 @@ def keep_best_values(df,l):
 parser = argparse.ArgumentParser(description='Process some integers.')
 
 parser.add_argument('data', metavar='f', type=str, help='matrix containing the pearson corr results and the genes names in col/row')
-parser.add_argument('--POBL', metavar='p',default=0.05, type=float, help='Percent of best links to keep in the end')
-parser.add_argument('--threshold', metavar='t',default=10, type=int, help='Number of ranks to keep by genes (can hugely lower computation time with small value for big dataset) ')
+parser.add_argument('model',metavar = 'm', type=str, help='model used (MI/GENIE3/PC)')
+parser.add_argument('--POBL', metavar='p',default=100, type=float, help='Percent of best links to keep in the end')
+parser.add_argument('--threshold', metavar='t',default=-1, type=int, help='Number of ranks to keep by genes (can hugely lower computation time with small value for big dataset) ')
 parser.add_argument('--HRR', action='store_true', default=False, help='if you want to use HRR to sort by rank')
 parser.add_argument('--njobs', metavar='j', type=int, help='number of cpus to use for parallel computing',default=1)
 parser.add_argument('--bytes', metavar='b', type=str, help='max_nbytes parameter for Parallel',default="1M")
-parser.add_argument('--zeros',action='store_true', help='Use this tag if your matrix contains half values',default=False)
 
 args = parser.parse_args()
 
@@ -88,9 +91,12 @@ df = pd.read_csv(args.data,header=0,index_col=0)
 df = df.astype('float64') #be sure to have all dataframe with the same type
 print("Done...")
 
+if(args.threshold == -1):
+    args.threshold = len(df.index)
+
 NB_OF_LINKS_TO_KEEP = int(round(args.POBL/100 * (len(df.index)**2)))
 
-if(args.zeros):
+if(args.model == 'MI' or (args.model == 'PC' and args.HRR)):
     print("Preprocessing...")
     for i in tqdm(range(len(df.columns))):
         for j in range(i+1,len(df.index)):
@@ -102,25 +108,30 @@ if(args.HRR):
     print("Step 1/2...")
     Parallel(n_jobs=args.njobs)(delayed(keep_best_links)(df,l) for l in tqdm(range((len(df.columns)))))
     print("Done...")
-    del(df) #free memory
 
     df2 = pd.read_csv('tmp_{}.csv'.format(args.data.split('.')[0]),header=None)
     df2.columns=["gene1","gene2","value",'rank']
 
     print("Step 2/2...")
     genes=[]
-    liste = Parallel(n_jobs=args.njobs,max_nbytes=args.bytes)(delayed(select_ranks)(df2,i,genes) for i in tqdm(range(len(df2.index))))
+    liste = Parallel(n_jobs=args.njobs,max_nbytes=args.bytes)(delayed(select_ranks)(df,df2,i,genes) for i in tqdm(range(len(df2.index))))
     liste = [x for x in liste if x is not None]
     df3 = pd.DataFrame(liste,columns=["gene1","gene2","value","rank"])
     df3 = df3.sort_values(by='rank',ascending=True)
     df3 = df3.head(NB_OF_LINKS_TO_KEEP)
     df3.to_csv('link_HRR_{}.csv'.format(args.data.split('.')[0]),index=False)
 else:
-    Parallel(n_jobs=args.njobs)(delayed(keep_best_values)(df,l) for l in tqdm(range((len(df.columns)))))
+    genes = []
+    Parallel(n_jobs=args.njobs)(delayed(keep_best_values)(df,l,genes) for l in tqdm(range((len(df.columns)))))
     df2 = pd.read_csv('tmp_{}.csv'.format(args.data.split('.')[0]),header=None)
-    df2.columns=["gene1","gene2","value"]
+    df2.columns=["gene1","gene2","value","signe"]
     df2 = df2.sort_values(by='value',ascending=False)
-    df2 = df2.head(NB_OF_LINKS_TO_KEEP)
+    if(args.POBL != 100):
+        df2 = df2.head(NB_OF_LINKS_TO_KEEP)
+    for i in range(len(df2.index)):
+        if(df2.at[i,'signe'] == '-'):
+            df2.at[i,'value'] = -1 * df2.at[i,'value']
+    df2 = df2.drop(columns=['signe'])
     df2.to_csv('link_{}.csv'.format(args.data.split('.')[0]),index=False)
 
 print("Done...")

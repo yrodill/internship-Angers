@@ -53,6 +53,8 @@ def get_adjacency_matrix(df,df2):
     for i in tqdm(range(len(df.index))):
         df2.at[df.at[i,'gene1'],df.at[i,'gene2']] = 1
         df2.at[df.at[i,'gene2'],df.at[i,'gene1']] = 1
+    if(df2.equals(df2.transpose())):
+        print("SYMETRIC MATRIX!")
     return df2
 
 def test_process(args,df,i):

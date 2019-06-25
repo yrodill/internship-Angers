@@ -344,4 +344,8 @@
   - meeting with Tanguy and Sébastien at the IRHS => confirmed using hypergeometric test + GO Slim BP EXP
   - GO fixed, working well with EGAD + GOATOOLS : TO DO => launch on a lot of results
   - problem with the parallelization  => write in file bugged for some lines
+
+- **Day 66** :
+  - The problem with the parallelization can't be fixed but with a threshold <100 it seems to work fine
+  - Added an option to calculate PR and weighted PR for each cluster
   
