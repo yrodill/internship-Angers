@@ -346,6 +346,14 @@
   - problem with the parallelization  => write in file bugged for some lines
 
 - **Day 66** :
-  - The problem with the parallelization can't be fixed but with a threshold <100 it seems to work fine
+  - The problem with the parallelization(filter_links.py) can't be fixed but with a threshold <100 it seems to work fine
   - Added an option to calculate PR and weighted PR for each cluster
+
+- **Day 67** :
+  - may have to parallelize the matrix completion (start of filter_links.py)
+  - new bash script to launch a complete study on 1 squared matrix (genes*genes)
+
+- **Day 68** :
+  - testing the full_analyze.sh script
+  - writing the report
   

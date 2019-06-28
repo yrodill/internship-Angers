@@ -76,12 +76,12 @@ def keep_best_values(df,l,liste):
 parser = argparse.ArgumentParser(description='Process some integers.')
 
 parser.add_argument('data', metavar='f', type=str, help='matrix containing the pearson corr results and the genes names in col/row')
-parser.add_argument('model',metavar = 'm', type=str, help='model used (MI/GENIE3/PC)')
 parser.add_argument('--POBL', metavar='p',default=100, type=float, help='Percent of best links to keep in the end')
 parser.add_argument('--threshold', metavar='t',default=-1, type=int, help='Number of ranks to keep by genes (can hugely lower computation time with small value for big dataset) ')
 parser.add_argument('--HRR', action='store_true', default=False, help='if you want to use HRR to sort by rank')
 parser.add_argument('--njobs', metavar='j', type=int, help='number of cpus to use for parallel computing',default=1)
-parser.add_argument('--bytes', metavar='b', type=str, help='max_nbytes parameter for Parallel',default="1M")
+parser.add_argument('--bytes', metavar='b', type=str, help='max_nbytes parameter for Parallel',default="10M")
+parser.add_argument('--fill', action='store_true', default=False, help='use if your matrix is halved')
 
 args = parser.parse_args()
 
@@ -96,17 +96,15 @@ if(args.threshold == -1):
 
 NB_OF_LINKS_TO_KEEP = int(round(args.POBL/100 * (len(df.index)**2)))
 
-if(args.model == 'MI' or (args.model == 'PC' and args.HRR)):
-    print("Preprocessing...")
-    for i in tqdm(range(len(df.columns))):
-        for j in range(i+1,len(df.index)):
-            if(df.iat[j,i] == 0 or df.iat[j,i] == 0.0):
-                df.iat[j,i] = df.iat[i,j]
+if(args.fill):
+    print("Completing the matrix...")
+    df2 = df.T
+    df = df + df2
     print('Done...')
 
 if(args.HRR):
     print("Step 1/2...")
-    Parallel(n_jobs=args.njobs)(delayed(keep_best_links)(df,l) for l in tqdm(range((len(df.columns)))))
+    Parallel(n_jobs=args.njobs,max_nbytes=args.bytes)(delayed(keep_best_links)(df,l) for l in tqdm(range((len(df.columns)))))
     print("Done...")
 
     df2 = pd.read_csv('tmp_{}.csv'.format(args.data.split('.')[0]),header=None)
@@ -119,10 +117,10 @@ if(args.HRR):
     df3 = pd.DataFrame(liste,columns=["gene1","gene2","value","rank"])
     df3 = df3.sort_values(by='rank',ascending=True)
     df3 = df3.head(NB_OF_LINKS_TO_KEEP)
-    df3.to_csv('link_HRR_{}.csv'.format(args.data.split('.')[0]),index=False)
+    df3.to_csv('tmp_{}'.format(args.data),index=False)
 else:
     genes = []
-    Parallel(n_jobs=args.njobs)(delayed(keep_best_values)(df,l,genes) for l in tqdm(range((len(df.columns)))))
+    Parallel(n_jobs=args.njobs,max_nbytes=args.bytes)(delayed(keep_best_values)(df,l,genes) for l in tqdm(range((len(df.columns)))))
     df2 = pd.read_csv('tmp_{}.csv'.format(args.data.split('.')[0]),header=None)
     df2.columns=["gene1","gene2","value","signe"]
     df2 = df2.sort_values(by='value',ascending=False)
@@ -132,10 +130,10 @@ else:
         if(df2.at[i,'signe'] == '-'):
             df2.at[i,'value'] = -1 * df2.at[i,'value']
     df2 = df2.drop(columns=['signe'])
-    df2.to_csv('link_{}.csv'.format(args.data.split('.')[0]),index=False)
+    df2.to_csv('tmp_{}'.format(args.data),index=False)
 
 print("Done...")
 
-print("Delete temporary file...")
-os.system("rm -f tmp_{}.csv".format(args.data.split('.')[0]))
-print("Done...")
+# print("Delete temporary file...")
+# os.system("rm -f tmp_{}.csv".format(args.data.split('.')[0]))
+# print("Done...")

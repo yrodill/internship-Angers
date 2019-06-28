@@ -110,8 +110,8 @@ parser.add_argument('data', metavar='f', type=str, help='file containing the lin
 parser.add_argument('GO', metavar='g', type=str, help='file containing the GO file')
 parser.add_argument('--process', metavar='p', default='all', help='filter by type of process(P = biological process, C = cellular component,F= molecular function')
 parser.add_argument('--ev_inc', metavar='e',nargs='*',type=str, default='all', help='evidence codes to use can be by group name/group names/evidence codes')
-parser.add_argument('--min', metavar='m',type=int, default=3, help='min value to filter under-represented GO Terms')
-parser.add_argument('--max', metavar='x',type=int, default=200, help='max value to filter over-represented GO Terms')
+# parser.add_argument('--min', metavar='m',type=int, default=3, help='min value to filter under-represented GO Terms')
+# parser.add_argument('--max', metavar='x',type=int, default=200, help='max value to filter over-represented GO Terms')
 parser.add_argument('--specific', action='store_true', help='If you are using a specific GO file (one given by parse_GO.py)',default=False)
 
 args = parser.parse_args()
@@ -182,11 +182,11 @@ for k,v in association.items():
     for go in v:
         functionnal_annotations.at[k,go] = 1
 
-indexes = []
-for go in GOTerms:
-	if(functionnal_annotations[go].sum() < args.min or functionnal_annotations[go].sum() > args.max):
-		indexes.append(go)
+# indexes = []
+# for go in GOTerms:
+# 	#if(functionnal_annotations[go].sum() < args.min or functionnal_annotations[go].sum() > args.max):
+# 	indexes.append(go)
 
-filtered_functionnal_annotations = functionnal_annotations.drop(columns=indexes)
+#filtered_functionnal_annotations = functionnal_annotations.drop(columns=indexes)
 
-filtered_functionnal_annotations.to_csv('tmp_GO_matrix.csv')
+functionnal_annotations.to_csv('tmp_GO_matrix.csv')
