@@ -356,4 +356,8 @@
 - **Day 68** :
   - testing the full_analyze.sh script
   - writing the report
-  
+  - don't have to parallelize the matrix completion, found a faster trick
+
+- **Day 69** :
+  - PlantPAN 3.0 : http://plantpan.itps.ncku.edu.tw/index.html
+  - Testing the fully automated full_analyze.sh (modified launch_GO_analyze.sh & GO_comparison.py)

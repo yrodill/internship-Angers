@@ -38,14 +38,24 @@ def compute_results(file,method,egad):
             df.to_csv(file,index=False)
         else:
             df.loc[-1]=[method+" score",score,'','','','','','','','','','']
-            df.to_excel(file,index=False)
+            if(args.HRR):
+                folder = args.method+'_'+args.data+'_'+args.exp+'_'+args.threshold+'_HRR'
+            else:
+                folder = args.method+'_'+args.data+'_'+args.exp+'_'+args.threshold
+            os.system("mkdir results/"+folder)
+            df.to_excel("results/"+folder+"/"+file,index=False)
 
 
 #MAIN
 parser = argparse.ArgumentParser(description='Process some integers.')
 
-parser.add_argument('auroc', metavar='d', type=str, help='EGAD file with GO terms that are enriched with AUROC values')
-parser.add_argument('pr', metavar='d', type=str, help='EGAD file with GO terms that are enriched with PR values')
+parser.add_argument('auroc', metavar='a', type=str, help='EGAD file with GO terms that are enriched with AUROC values')
+parser.add_argument('pr', metavar='p', type=str, help='EGAD file with GO terms that are enriched with PR values')
+parser.add_argument('method', metavar='m', type=str, help='method used')
+parser.add_argument('data', metavar='d', type=str, help='data type')
+parser.add_argument('exp', metavar='e', type=str, help='exp type')
+parser.add_argument('threshold', metavar='t', type=str, help='threshold used for link selection')
+parser.add_argument('--HRR',action='store_true', help='if HRR used', default=False)
 
 args = parser.parse_args()
 
