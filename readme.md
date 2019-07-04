@@ -361,3 +361,11 @@
 - **Day 69** :
   - PlantPAN 3.0 : http://plantpan.itps.ncku.edu.tw/index.html
   - Testing the fully automated full_analyze.sh (modified launch_GO_analyze.sh & GO_comparison.py)
+
+- **Day 70** :
+  - run_benchmark.sh in testing phase
+  - to do : go_analyze on all best links (pas de clustering)
+
+- **Day 71** :
+  - there might be a problem with the parallelization in filter_links.py (on the cluster the cpus dont seem to be used)
+  
