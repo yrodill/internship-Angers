@@ -182,11 +182,5 @@ for k,v in association.items():
     for go in v:
         functionnal_annotations.at[k,go] = 1
 
-# indexes = []
-# for go in GOTerms:
-# 	#if(functionnal_annotations[go].sum() < args.min or functionnal_annotations[go].sum() > args.max):
-# 	indexes.append(go)
-
-#filtered_functionnal_annotations = functionnal_annotations.drop(columns=indexes)
 
 functionnal_annotations.to_csv('tmp_GO_matrix.csv')

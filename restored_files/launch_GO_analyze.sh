@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# /!\ WARNING /!\
-# Be sure not to have important files with a name starting with tmp_ as it would be deleted (else comment line 63)
+: 'multiline comment:
+/!\ WARNING /!\
+# Be sure not to have important files with a name starting with tmp_ as it would be deleted (else comment line 70)
 
 #Bash file to launch the GO enrichment
 # Required Arguments :
@@ -18,6 +19,7 @@
 # $9 : filter for the GO terms (biological process/cellular component/molecular fct°) (BP/CC/MF)
 # $10 : filter for the evidence codes
 # $11 : clustering method to use (greedy or betweeness)
+'
 
 #Folders check and clean
 for folder in xls cluster_links AUROC_cluster_links study PR_cluster_links
@@ -31,14 +33,8 @@ for folder in xls cluster_links AUROC_cluster_links study PR_cluster_links
       done
 
 #Part for GOATOOLS
-if [ $5 = "HRR" ]
-  then
-    Rscript --vanilla clustering.R $6 ${6:-greedy} tmp_$6
-    python files_parsing.py $1 tmp_$6 $7 --threshold ${8:-100} --specific
-  else
-    Rscript --vanilla clustering.R $6 ${6:-greedy} tmp_$6
-    python files_parsing.py $1 tmp_$6 $7 --threshold ${8:-100}
-fi
+Rscript --vanilla clustering.R $6 ${11:-greedy} tmp_$6
+python files_parsing.py $6 tmp_$6 $7 --threshold ${8:-100} --specific
 
 # if [ $? -eq 0 ] #exit if the clustering failed
 # then
@@ -54,9 +50,9 @@ for file in study/*
 #Part for EGAD on each cluster
 for file2 in cluster_links/*
     do
-      python EGAD_preprocessing.py ${file2} $7 --process ${$9:-BP} --ev_inc ${10:-Experimental}
+      python EGAD_preprocessing.py ${file2} $7 --process ${9:-BP} --ev_inc ${10:-Experimental}
       Rscript --vanilla GO_enrichment.R tmp_adj_matrix.csv tmp_GO_matrix.csv AUROC_${file2} PR_${file2}
-      if [ $5 == 'HRR' ]
+      if [ $5 = 'HRR' ]
         then
           python GO_comparison.py AUROC_${file2} PR_${file2} $1 $2 $3 $4 --$5
         else

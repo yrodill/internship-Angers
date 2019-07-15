@@ -368,4 +368,8 @@
 
 - **Day 71** :
   - there might be a problem with the parallelization in filter_links.py (on the cluster the cpus dont seem to be used)
+
+- **Day 72** :
+  - Fixed run_benchmark.sh ; now can run on all !
+  - TO DO : global results without clustering
   
