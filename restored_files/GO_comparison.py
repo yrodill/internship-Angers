@@ -17,32 +17,40 @@ def compute_results(file,method,egad,folder):
     tot_gen = 0
     score = 0.0
     if(file.split('_')[1].replace('cluster','') == args.auroc.split('/')[-1].split('_')[1]):
-        df = pd.read_excel(file,index_col=None)
-        df[method] = 0.0
-        for i in tqdm(range(len(df.index))):
-            for j in range(len(egad.index)):
-                if(df.at[i,'GO'] == egad.at[j,'GO'].replace(".",":")):
-                    df.at[i,method] = egad.at[j,'value']
-                    tot_gen += df.at[i,'study_count']
-                    score += float(df.at[i,method]*df.at[i,'study_count'])
-                    break
-        score /= tot_gen
-        df=df.sort_values(by='p_uncorrected',ascending=True)
         if(method == 'PR'):
-            df.append([method+" score",score,'','','','','','','','','','',''])
-            # index = []
-            # for i in range(len(df.index)):
-            #     if(df.at[i,method] == 0.0):
-            #         index.append(i)
-            # df=df.drop(index)
+            df = pd.read_excel("results/"+folder+"/"+file.split("/")[-1],index_col=None)
+            df[method] = 0.0
+            for i in tqdm(range(len(df.index))):
+                for j in range(len(egad.index)):
+                    if(df.at[i,'GO'] == egad.at[j,'GO'].replace(".",":")):
+                        df.at[i,method] = egad.at[j,'value']
+                        tot_gen += df.at[i,'study_count']
+                        score += float(df.at[i,method]*df.at[i,'study_count'])
+                        break
+            score /= tot_gen
+            df=df.sort_values(by='p_uncorrected',ascending=True)
+            df.loc[len(df.index)+1] = [method+" score",score,'','','','','','','','','','','']
             df.to_csv("results/"+folder+"/"+file.split("/")[-1],index=False)
         else:
-            df.iloc[-1]=[method+" score",score,'','','','','','','','','','']
+            df = pd.read_excel(file,index_col=None)
+            df[method] = 0.0
+            for i in tqdm(range(len(df.index))):
+                for j in range(len(egad.index)):
+                    if(df.at[i,'GO'] == egad.at[j,'GO'].replace(".",":")):
+                        df.at[i,method] = egad.at[j,'value']
+                        tot_gen += df.at[i,'study_count']
+                        score += float(df.at[i,method]*df.at[i,'study_count'])
+                        break
+            score /= tot_gen
+            df=df.sort_values(by='p_uncorrected',ascending=True)
+
+            df.loc[len(df.index)+1] = [method+" score",score,'','','','','','','','','','']
             if(os.path.isdir("results/"+folder)):
                 print("File existing...Next step !")
             else:
                 os.mkdir("results/"+folder)
             df.to_excel("results/"+folder+"/"+file.split("/")[-1],index=False)
+
 
 #MAIN
 parser = argparse.ArgumentParser(description='Process some integers.')

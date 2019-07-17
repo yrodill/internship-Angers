@@ -372,4 +372,7 @@
 - **Day 72** :
   - Fixed run_benchmark.sh ; now can run on all !
   - TO DO : global results without clustering
-  
+
+- **Day 73/74** :
+  - Global result for each condition : ok
+  - One script to gather results of clusters : ok
