@@ -4,8 +4,8 @@
 #' @author Benoît Bothorel March 2019
 #' @param Links_matrix Binary matrix of genes*genes.
 #' @param GO_matrix Binary matrix of genes*GOTerms.
-#' @param output Filename of the output.
-#' @param calc Which score to calculate (AUROC/PR)
+#' @param output1 Filename of the AUROC output.
+#' @param output2 Filename of the AUPR output
 #' @return Write a csv file containing the GOTerms with an AUC >threshold.
 #' @examples
 #' Rscript --vanilla GO_enrichment.R genes_links.csv GO_matrix.csv results.csv 0.7

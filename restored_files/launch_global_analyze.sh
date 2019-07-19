@@ -35,15 +35,20 @@ for folder in xls cluster_links AUROC_cluster_links study PR_cluster_links
 #Part for GOATOOLS
 python files_parsing_global.py $6 $7 $8 --threshold ${9:-100} --specific
 
-python /home/bothorel/goatools/scripts/find_enrichment.py --ev_inc=${11:-Experimental} --pval=1 --ns=${10:-BP} --pval_field=fdr_bh --outfile=$PWD/xls/result.xlsx --no_propagate_counts --method=fdr_bh --obo=go-basic.obo study_$7 population_$6 tmp_$8
+if [ $5 = 'HRR' ]
+    then
+	python ./goatools/scripts/find_enrichment.py --ev_inc=${11:-Experimental} --pval=1 --ns=${10:-BP} --pval_field=fdr_bh --outfile=$PWD/xls/result_$1_$2_$3_$4_$5.xlsx --no_propagate_counts --method=fdr_bh --obo=go-basic.obo study_$7 population_$6 tmp_$8
+    else
+	python ./goatools/scripts/find_enrichment.py --ev_inc=${11:-Experimental} --pval=1 --ns=${10:-BP} --pval_field=fdr_bh --outfile=$PWD/xls/result_$1_$2_$3_$4.xlsx --no_propagate_counts --method=fdr_bh --obo=go-basic.obo study_$7 population_$6 tmp_$8
+fi
 
 python EGAD_preprocessing.py $7 $8 --process ${10:-BP} --ev_inc ${11:-Experimental} --specific
 Rscript --vanilla GO_enrichment.R tmp_adj_matrix.csv tmp_GO_matrix.csv AUROC_$6 PR_$6
 if [ $5 = 'HRR' ]
     then
-        python GO_comparison_global.py AUROC_$6 PR_$6 ./xls/result_$1_$2_$3_$4_$5.xlsx $1 $2 $3 $4 --$5
+        python GO_comparison_global.py AUROC_$6 PR_$6 ./xls/result_$1_$2_$3_$4_$5.xlsx $1 $2 $3 $4 tmp_adj_matrix.csv --$5
     else
-        python GO_comparison_global.py AUROC_$6 PR_$6 ./xls/result_$1_$2_$3_$4.xlsx $1 $2 $3 $4
+        python GO_comparison_global.py AUROC_$6 PR_$6 ./xls/result_$1_$2_$3_$4.xlsx $1 $2 $3 $4 tmp_adj_matrix.csv
     fi
 
 #Cleaning

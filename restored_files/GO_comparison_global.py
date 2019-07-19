@@ -61,6 +61,7 @@ parser.add_argument('method', metavar='m', type=str, help='method used')
 parser.add_argument('data', metavar='d', type=str, help='data type')
 parser.add_argument('exp', metavar='e', type=str, help='exp type')
 parser.add_argument('threshold', metavar='t', type=str, help='threshold used for link selection')
+parser.add_argument('matrix', metavar='m', type=str, help='adjacency matrix of the current cluster')
 parser.add_argument('--HRR',action='store_true', help='if HRR used', default=False)
 
 args = parser.parse_args()
@@ -76,3 +77,5 @@ else:
 
 compute_results(args.goatools,'AUROC',auroc,folder)
 compute_results(args.goatools,'PR',pr,folder)
+adj_mat = pd.read_csv(args.matrix,header=0,index_col=0)
+adj_mat.to_csv("results/"+folder+"/"+args.goatools.split('/')[-1].split('.')[0]+"_adj_mat.csv",header=True,index=True)

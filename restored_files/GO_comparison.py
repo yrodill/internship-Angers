@@ -18,6 +18,8 @@ def compute_results(file,method,egad,folder):
     score = 0.0
     if(file.split('_')[1].replace('cluster','') == args.auroc.split('/')[-1].split('_')[1]):
         if(method == 'PR'):
+            adj_mat = pd.read_csv(args.matrix,header=0,index_col=0)
+            adj_mat.to_csv("results/"+folder+"/"+file.split('_')[1]+"_adj_mat.csv",header=True,index=True)
             df = pd.read_excel("results/"+folder+"/"+file.split("/")[-1],index_col=None)
             df[method] = 0.0
             for i in tqdm(range(len(df.index))):
@@ -61,6 +63,7 @@ parser.add_argument('method', metavar='m', type=str, help='method used')
 parser.add_argument('data', metavar='d', type=str, help='data type')
 parser.add_argument('exp', metavar='e', type=str, help='exp type')
 parser.add_argument('threshold', metavar='t', type=str, help='threshold used for link selection')
+parser.add_argument('matrix', metavar='m', type=str, help='adjacency matrix of the current cluster')
 parser.add_argument('--HRR',action='store_true', help='if HRR used', default=False)
 
 args = parser.parse_args()

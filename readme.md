@@ -376,3 +376,10 @@
 - **Day 73/74** :
   - Global result for each condition : ok
   - One script to gather results of clusters : ok
+
+- **Day 75** :
+  - Launched all biotic benchmark for monday
+  - added : keep the adjacency matrix of every cluster in for possible further experiments(modification in GO_comparison.py)
+  - new scripts to gather all informations from recap files in one single file.
+  - to do : recap files for global benchmark
+  
